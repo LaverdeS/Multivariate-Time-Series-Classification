@@ -198,25 +198,69 @@ def argparse():
 
 if __name__ == '__init__':
     print_bold("\nLSTM TIME-SERIES MULTIVARIATE CLASSIFIER\n")
-    # print_yellow("****************************************** \n")
 
     data_path = ".data/"
     print("data_path: ", data_path)
 
-    anoth = read_json(data_path + "AnothDistance.txt")
-    arif = read_json(data_path + "ArifDistance.txt")
-    ashok = read_json(data_path + "AshokDistance.txt")
-    gowthom = read_json(data_path + "GowthomDistance.txt")
-    josephin = read_json(data_path + "JosephinDistance.txt")
-    raghu = read_json(data_path + "RaghuDistance.txt")
+    PARTICIPANTS = ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin", "Raghu"]
 
-    data_generator = [anoth, arif, ashok, gowthom, josephin, raghu], ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin",
-                                                                      "Raghu"]  # data, name
+    # read distances_collection for each participant: list of lists(pattern_name, list)
+    anoth_distance = read_json("AnothDistance.txt")
+    arif_distance = read_json("ArifDistance.txt")
+    ashok_distance = read_json("AshokDistance.txt")
+    gowthom_distance = read_json("GowthomDistance.txt")
+    josephin_distance = read_json("JosephinDistance.txt")
+    raghu_distance = read_json("RaghuDistance.txt")
+
+    # read pupil_dilation for each participant (dilation: diameter changes)
+    anoth_pupil = read_json("AnothPupil.txt")
+    arif_pupil = read_json("ArifPupil.txt")
+    ashok_pupil = read_json("AshokPupil.txt")
+    gowthom_pupil = read_json("GowthomPupil.txt")
+    josephin_pupil = read_json("JosephinPupil.txt")
+    raghu_pupil = read_json("RaghuPupil.txt")
+
+    # add the pattern_name information to the pupil_data(*_p)
+    anoth_pupil = add_pattern_name_to_ts(anoth_distance, anoth_pupil)
+    arif_pupil = add_pattern_name_to_ts(arif_distance, arif_pupil)
+    ashok_pupil = add_pattern_name_to_ts(ashok_distance, ashok_pupil)
+    gowthom_pupil = add_pattern_name_to_ts(gowthom_distance, gowthom_pupil)
+    josephin_pupil = add_pattern_name_to_ts(josephin_distance, josephin_pupil)
+    raghu_pupil = add_pattern_name_to_ts(raghu_distance, raghu_pupil)
+
+    # Build the Dataframe
+    data_generator = [
+        [anoth_distance, arif_distance, ashok_distance, gowthom_distance, josephin_distance, raghu_distance],
+        ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin", "Raghu"],
+        [anoth_pupil, arif_pupil, ashok_pupil, gowthom_pupil, josephin_pupil, raghu_pupil]]
+
+    confirm_pattern_matching = False
 
     print("number of collections (participants): ", len(data_generator[0]), end="\n\n")
 
-    # BUILD RAW DATAFRAME
-    print_bold("building DataFrame...\n")
     df_concat = pd.DataFrame()
+
+    for ix, (participant_data_distance, participant_name, participant_data_pupil) in enumerate(
+            zip(data_generator[0], data_generator[1], data_generator[2])):
+
+        df_distance = pd.DataFrame(participant_data_distance, columns=["pattern_name", "ts_distance"])
+        df_pupil = pd.DataFrame(participant_data_pupil, columns=["pattern_name", "ts_pupil"])
+
+        if ix == 0 and confirm_pattern_matching:
+            print("cofirming pattern...")
+            print(df_distance['pattern_name'].head())
+            print(df_pupil['pattern_name'].head())
+            print()
+
+        # put everything in one dataframe: df_distance then concat
+        df_distance["ts_pupil"] = df_pupil["ts_pupil"]
+        df_distance["participant_name"] = participant_name
+        print(f"{len(participant_data_distance)} rows are being been added for {participant_name}...")
+        df_concat = pd.concat([df_concat, df_distance], ignore_index=True) if ix > 0 else df_distance
+
+    print(f"\nDataFrame has now {len(df_concat.ts_distance)} samples...")
+
+    df_concat = df_concat[["participant_name", "pattern_name", "ts_distance", "ts_pupil"]]
+    print(df_concat.head(), df_concat.tail())
 
 
