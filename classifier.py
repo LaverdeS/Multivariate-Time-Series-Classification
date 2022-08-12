@@ -274,40 +274,355 @@ if __name__ == '__main__':
     if "binary" in CLASSIFIER_MODE:
         pass
 
-    else:
-        # normalization
-        if VERBOSE_LEVEL > 0:
-            print("checking sequence lenghts matching (first 20)...\n")
+    # multi-participant classifier
+    # normalization
+    if VERBOSE_LEVEL > 0:
+        print("checking sequence lenghts matching (first 20)...\n")
 
-            for ix, (d, p) in enumerate(zip(df_concat['ts_distance'], df_concat['ts_pupil'])):
-                print(f"lenght of sequence in ts_distance: {len(d)}, lenght of sequence in ts_pupil: {len(p)}", end=" ")
-                print_bold(len(d) == len(p))
-                if ix == 20:
-                    break
+        for ix, (d, p) in enumerate(zip(df_concat['ts_distance'], df_concat['ts_pupil'])):
+            print(f"lenght of sequence in ts_distance: {len(d)}, lenght of sequence in ts_pupil: {len(p)}", end=" ")
+            print_bold(len(d) == len(p))
+            if ix == 20:
+                break
 
+    print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df_concat['ts_distance'].tolist()))
+    print("min lenght in ts_pupil = ", min_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+    print("max lenght in ts_distance = ", max_listoflists_lenght(df_concat['ts_distance'].tolist()))
+    print("max lenght in ts_pupil = ", max_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+
+    # apply normalization to the DataFrame (value and lenght)
+    df_concat.ts_distance = df_concat.ts_distance.apply(normalize)
+    df_concat.ts_pupil = df_concat.ts_pupil.apply(normalize)
+    print("\nthe data has been normalized by value, mean=0, std=1")
+
+    df_concat.ts_distance = normalize_lenghts(df_concat.ts_distance.tolist())
+    df_concat.ts_pupil = normalize_lenghts(df_concat.ts_pupil.tolist(),
+                                           max_lenght=max_listoflists_lenght(df_concat['ts_distance']))
+    print("the data has been normalized by lenght (stretched to the max lenght)")
+
+    if VERBOSE_LEVEL > 0:
         print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df_concat['ts_distance'].tolist()))
         print("min lenght in ts_pupil = ", min_listoflists_lenght(df_concat['ts_pupil'].tolist()))
         print("max lenght in ts_distance = ", max_listoflists_lenght(df_concat['ts_distance'].tolist()))
         print("max lenght in ts_pupil = ", max_listoflists_lenght(df_concat['ts_pupil'].tolist()))
 
-        # apply normalization to the DataFrame (value and lenght)
-        df_concat.ts_distance = df_concat.ts_distance.apply(normalize)
-        df_concat.ts_pupil = df_concat.ts_pupil.apply(normalize)
-        print("\nthe data has been normalized by value, mean=0, std=1")
+    if PLOT:
+        gowthom_distance = get_distance_in_dataframe(df_concat, "Gowthom")
+        fig = plot_collection("pattern5", gowthom_distance)
+        fig.show(renderer="browser")
 
-        df_concat.ts_distance = normalize_lenghts(df_concat.ts_distance.tolist())
-        df_concat.ts_pupil = normalize_lenghts(df_concat.ts_pupil.tolist(),
-                                               max_lenght=max_listoflists_lenght(df_concat['ts_distance']))
-        print("the data has been normalized by lenght (stretched to the max lenght)")
+    # feature selection --> explode the DataFrame ts_distance and ts_pupil
 
-        if VERBOSE_LEVEL > 0:
-            print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df_concat['ts_distance'].tolist()))
-            print("min lenght in ts_pupil = ", min_listoflists_lenght(df_concat['ts_pupil'].tolist()))
-            print("max lenght in ts_distance = ", max_listoflists_lenght(df_concat['ts_distance'].tolist()))
-            print("max lenght in ts_pupil = ", max_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+    for ix, series in tqdm(df_concat.iterrows(), total=len(df_concat)):
+        series_df_distance = pd.DataFrame(series.ts_distance, columns=["trace_difference"])
+        series_df_pupil = pd.DataFrame(series.ts_pupil, columns=["pupil_dilation"])
 
-        if PLOT:
-            gowthom_distance = get_distance_in_dataframe(df_concat, "Gowthom")
-            fig = plot_collection("pattern5", gowthom_distance)
-            fig.show(renderer="browser")
+        series_df_distance["pupil_dilation"] = series_df_pupil['pupil_dilation']
+        series_df_distance["participant_name"] = series.participant_name
+        series_df_distance["pattern_name"] = series.pattern_name
+        series_df_distance["series_id"] = ix
+        series_df_distance = series_df_distance[
+            ["participant_name", "pattern_name", "series_id", "trace_difference", "pupil_dilation"]]
+        X = series_df_distance if ix == 0 else pd.concat([X, series_df_distance])
 
+    # filter dfs selecting the desired features
+
+    FEATURES = ["pattern_name", "trace_difference", "pupil_dilation"]
+    PREDICTION_TARGET = "participant_name"
+
+    y = X[["series_id", "pattern_name", "participant_name"]]
+    y = y[["series_id", PREDICTION_TARGET]]
+
+    X_columns = ["series_id"]
+    X_columns.extend(FEATURES)
+    X = X[X_columns]
+
+    y.reset_index(inplace=True)
+    del y["index"]
+    X.reset_index(inplace=True)
+    del X["index"]
+
+    print(f"\nX: {len(X)}; y: {len(y)}; equal? {len(X) == len(y)}")
+
+    if VERBOSE_LEVEL > 0:
+        print(
+            f"\nConsidering {len(PARTICIPANTS)} participants with {len(anoth_distance)} experiments each, we have {len(PARTICIPANTS) * len(anoth_distance)} number of samples or single graphs.\n\
+        Naturally the lenght of the time-series for a single experiment is dependent on the speed of the user at that pattern attempt. \n\
+        The absolute minimum lenght for this data collection is {min_listoflists_lenght(df_concat.ts_distance.tolist())} and the maximum {max_listoflists_lenght(df_concat.ts_distance.tolist())}. \n\
+        After normalization, all time series have the same lenght: {max_listoflists_lenght(df_concat.ts_distance.tolist())}. \n\
+        Therefore, each equal-lenght time series (one single row) can be exploded into {max_listoflists_lenght(df_concat.ts_distance.tolist())} rows. \n\
+        In order to identify the original row index before exploding, a new column 'series_id' is added to de dataframe. \n\
+        Ergo, the total number of samples for my new dataframes X and y is {len(PARTICIPANTS) * len(anoth_distance) * max_listoflists_lenght(df_concat.ts_distance.tolist())}.")
+
+        print("data class distribution after transformation...\n")
+        print(y.participant_name.value_counts())
+        print("\n")
+        y.participant_name.value_counts().plot(kind="bar")
+        plt.xticks(rotation=45)
+
+        print("data class distribution after transformations...\n")
+        print(X.pattern_name.value_counts())
+        print("\n")
+        X.pattern_name.value_counts().plot(kind="bar")
+        plt.xticks(rotation=45)
+
+    # encode pattern_name using LabelEncoder()
+
+    pattern_encoder = LabelEncoder()
+
+    encoded_patterns = pattern_encoder.fit_transform(X.pattern_name)
+    print({k: v for k, v in zip(pattern_encoder.classes_.tolist(), set(encoded_patterns))})
+
+    X["pattern_id"] = encoded_patterns
+    X.reset_index(inplace=True)
+    del X["index"]
+
+    if "specific" in CLASSIFIER_MODE:
+        pass
+
+    del X['pattern_name']
+    del X['pattern_id']
+
+    FEATURE_COLUMNS = X.columns.tolist()[1:]
+
+    # encode labels: participant_name
+
+    label_encoder = LabelEncoder()
+
+    encoded_labels = label_encoder.fit_transform(y.participant_name)
+    print({k: v for k, v in zip(label_encoder.classes_.tolist(), set(encoded_labels))})
+
+    y["label"] = encoded_labels
+    y.reset_index(inplace=True)
+    del y["index"]
+
+    #### train-test-val-split
+
+    # train, val, test split stratifies (balanced)
+
+    targets = []
+    data = []
+    for series_id, group in X.groupby("series_id"):
+        sequence_features = group[FEATURE_COLUMNS]
+        label = y[y.series_id == series_id].iloc[0].label  # all series would have same label so just take one
+        data.append(sequence_features)
+        targets.append(label)
+
+    train_sequences, test_sequences, ytrain, ytest = train_test_split(data, targets, test_size=0.2, random_state=42,
+                                                                      stratify=targets)
+    train_sequences, val_sequences, ytrain, yval = train_test_split(train_sequences, ytrain, test_size=0.2,
+                                                                    random_state=42, stratify=ytrain)
+
+    train_sequences = [(sequence, label) for sequence, label in zip(train_sequences, ytrain)]
+    test_sequences = [(sequence, label) for sequence, label in zip(test_sequences, ytest)]
+    val_sequences = [(sequence, label) for sequence, label in zip(val_sequences, yval)]
+
+    print("train, val, test")
+    len(train_sequences), len(val_sequences), len(test_sequences)
+
+
+    class UserDataset(Dataset):
+
+        def __init__(self, sequences) -> None:
+            super().__init__()
+            self.sequences = sequences
+
+        def __len__(self):
+            return len(self.sequences)
+
+        def __getitem__(self, idx):
+            sequence, label = self.sequences[idx]
+            return dict(
+                sequence=torch.Tensor(sequence.to_numpy()),
+                labels=torch.tensor(label).long()
+            )
+
+        def pad_sequences(self):
+            pass
+
+
+    print("cpu_count: ", cpu_count())
+
+
+    class UserDataModule(pl.LightningDataModule):
+
+        def __init__(self, train_sequences, test_sequences, val_sequences, batch_size):
+            super().__init__()
+            self.train_sequences = train_sequences
+            self.test_sequences = test_sequences
+            self.val_sequences = val_sequences
+            self.batch_size = batch_size
+
+        def setup(self, stage=None):
+            self.train_dataset = UserDataset(self.train_sequences)
+            self.test_dataset = UserDataset(self.test_sequences)
+            self.val_dataset = UserDataset(self.val_sequences)
+
+        def train_dataloader(self):
+            return DataLoader(
+                self.train_dataset,
+                batch_size=self.batch_size,
+                shuffle=True,
+                num_workers=cpu_count()
+            )
+
+        def val_dataloader(self):
+            return DataLoader(
+                self.val_dataset,
+                batch_size=self.batch_size,
+                shuffle=False,
+                num_workers=cpu_count()
+            )
+
+        def test_dataloader(self):
+            return DataLoader(
+                self.test_dataset,
+                batch_size=self.batch_size,
+                shuffle=False,
+                num_workers=cpu_count()
+            )
+
+            #### BUILD MODEL AND TRAIN IT
+
+
+    N_EPOCHS = 800
+    BATCH_SIZE = 16  # 8 for binary pattern-specific
+
+    data_module = UserDataModule(train_sequences, test_sequences, val_sequences, BATCH_SIZE)
+
+
+    # model
+
+    def init_weights(m, verbose=False):
+        if "LSTM" in str(m):
+            parameters = copy.deepcopy(m._parameters)
+            for param, v in m._parameters.items():
+                try:
+                    if "weight" in param:
+                        parameters[param] = torch.nn.init.xavier_uniform_(v)
+                    elif "bias" in param:
+                        parameters[param] = v.fill_(0.01)
+                except RuntimeError:
+                    if verbose:
+                        print(f"lstm_parameter {param} uses grad and cannot be initialized")
+            print("LSTM module weights and biases initialized")
+            return parameters
+        torch.nn.init.xavier_uniform_(m.weight)
+        m.bias.data.fill_(0.01)
+        print("Linear module weights and biases initialized")
+
+
+    class SequenceModel(nn.Module):
+
+        def __init__(self, n_features, n_classes, n_hidden=256, n_layers=2):
+            super().__init__()
+            self.lstm = nn.LSTM(
+                input_size=n_features,
+                hidden_size=n_hidden,
+                num_layers=n_layers,
+                batch_first=True,
+                dropout=0.75  # hyperparameter for regularization
+            )
+            self.classifier = nn.Linear(n_hidden, n_classes)
+
+            # self.lstm.apply(init_weights)
+            # self.classifier.apply(init_weights)
+
+        def forward(self, x):
+            self.lstm.flatten_parameters()  # for multi_gpu purposes
+            _, (hidden, _) = self.lstm(x)
+            out = hidden[-1]
+            return self.classifier(out)
+
+
+    class UserPredictor(pl.LightningModule):
+
+        def __init__(self, n_features: int, n_classes: int):
+            super().__init__()
+            self.model = SequenceModel(n_features, n_classes)
+            self.criterion = nn.CrossEntropyLoss()
+
+        def forward(self, x, labels=None):
+            output = self.model(x)
+            loss = 0
+            if labels is not None:
+                loss = self.criterion(output, labels)
+            return loss, output
+
+        def training_step(self, batch, batch_idx):
+            sequences = batch["sequence"]
+            labels = batch["labels"]
+            loss, outputs = self(sequences, labels)
+            predictions = torch.argmax(outputs, dim=1)
+            step_accuracy = accuracy(predictions, labels)
+
+            self.log("train_loss", loss, prog_bar=True, logger=True)
+            self.log("train_accuracy", step_accuracy, prog_bar=True, logger=True)
+            return {"loss": loss, "accuracy": step_accuracy}
+
+        def validation_step(self, batch, batch_idx):
+            sequences = batch["sequence"]
+            labels = batch["labels"]
+            loss, outputs = self(sequences, labels)
+            predictions = torch.argmax(outputs, dim=1)
+            step_accuracy = accuracy(predictions, labels)
+
+            self.log("val_loss", loss, prog_bar=True, logger=True)
+            self.log("val_accuracy", step_accuracy, prog_bar=True, logger=True)
+            return {"loss": loss, "accuracy": step_accuracy}
+
+        def test_step(self, batch, batch_idx):
+            sequences = batch["sequence"]
+            labels = batch["labels"]
+            loss, outputs = self(sequences, labels)
+            predictions = torch.argmax(outputs, dim=1)
+            step_accuracy = accuracy(predictions, labels)
+
+            self.log("test_loss", loss, prog_bar=True, logger=True)
+            self.log("test_accuracy", step_accuracy, prog_bar=True, logger=True)
+            return {"loss": loss, "accuracy": step_accuracy}
+
+        def configure_optimizers(self):
+            return optim.Adam(self.parameters(), lr=0.0001)
+
+
+    model = UserPredictor(
+        n_features=len(FEATURE_COLUMNS),
+        n_classes=len(label_encoder.classes_)
+    )
+
+    # init tensorboar
+
+    # %load_ext tensorboard
+    # %tensorboard --logdir ./logs
+
+    checkpoint_callback = ModelCheckpoint(
+        dirpath="checkpoints",
+        filename="best-checkpoint",
+        save_top_k=1,
+        verbose=False,
+        monitor="val_loss",
+        mode="min"
+    )
+
+    logger = TensorBoardLogger("logs", name="usergaze")
+
+    trainer = pl.Trainer(
+        logger=logger,
+        callbacks=checkpoint_callback,
+        max_epochs=N_EPOCHS,
+        accelerator="gpu",  # gpu
+        devices=1,
+        enable_progress_bar=True,
+        log_every_n_steps=1
+    )
+
+    # !wget -O mini.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh
+    # !chmod +x mini.sh
+    # !bash ./mini.sh -b -f -p /usr/local
+    # !conda install -q -y jupyter
+    # !conda install -q -y google-colab -c conda-forge
+    # !python -m ipykernel install --name "py39" --user
+
+    # environ['WANDB_CONSOLE'] = 'off'
+    trainer.fit(model, data_module)
