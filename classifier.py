@@ -8,6 +8,7 @@ import torch
 import pytorch_lightning as pl
 import seaborn as sns
 import copy
+import warnings
 
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -28,11 +29,17 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from torchmetrics.functional import accuracy
 from sklearn.metrics import classification_report, confusion_matrix
 
-
 pl.seed_everything(42)
 
 float_formatter = "{:.4f}".format
 np.set_printoptions(formatter={'float_kind': float_formatter})
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# global variables
+CLASSIFIER_MODES = "pattern-agnostic", "pattern-specific", "pattern-agnostic-binary", "pattern-specific-binary"
+CLASSIFIER_MODE = CLASSIFIER_MODES[0]
+VERBOSE_LEVEL = 0
+PLOT = False
 
 
 def print_yellow(text): print("\033[93m {}\033[00m".format(text))
@@ -81,7 +88,6 @@ def normalize_lenghts(l, verbose=False, max_lenght=0):
     """l is a list of lists"""
     if max_lenght == 0:
         max_lenght = max_listoflists_lenght(l, verbose)
-    print("max_lenght: ", max_lenght)
     new_l = [np.interp(np.linspace(0, 1, max_lenght).astype('float'), np.linspace(0, 1, len(l_i)).astype('float'), l_i)
              for l_i in l]
     if verbose:
@@ -196,8 +202,9 @@ def argparse():
     pass
 
 
-if __name__ == '__init__':
-    print_bold("\nLSTM TIME-SERIES MULTIVARIATE CLASSIFIER\n")
+if __name__ == '__main__':
+    print_bold("\n______________________________________________________________________\n\
+    LSTM TIME-SERIES MULTIVARIATE CLASSIFIER\n")
 
     data_path = ".data/"
     print("data_path: ", data_path)
@@ -205,20 +212,20 @@ if __name__ == '__init__':
     PARTICIPANTS = ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin", "Raghu"]
 
     # read distances_collection for each participant: list of lists(pattern_name, list)
-    anoth_distance = read_json("AnothDistance.txt")
-    arif_distance = read_json("ArifDistance.txt")
-    ashok_distance = read_json("AshokDistance.txt")
-    gowthom_distance = read_json("GowthomDistance.txt")
-    josephin_distance = read_json("JosephinDistance.txt")
-    raghu_distance = read_json("RaghuDistance.txt")
+    anoth_distance = read_json(data_path + "AnothDistance.txt")
+    arif_distance = read_json(data_path + "ArifDistance.txt")
+    ashok_distance = read_json(data_path + "AshokDistance.txt")
+    gowthom_distance = read_json(data_path + "GowthomDistance.txt")
+    josephin_distance = read_json(data_path + "JosephinDistance.txt")
+    raghu_distance = read_json(data_path + "RaghuDistance.txt")
 
     # read pupil_dilation for each participant (dilation: diameter changes)
-    anoth_pupil = read_json("AnothPupil.txt")
-    arif_pupil = read_json("ArifPupil.txt")
-    ashok_pupil = read_json("AshokPupil.txt")
-    gowthom_pupil = read_json("GowthomPupil.txt")
-    josephin_pupil = read_json("JosephinPupil.txt")
-    raghu_pupil = read_json("RaghuPupil.txt")
+    anoth_pupil = read_json(data_path + "AnothPupil.txt")
+    arif_pupil = read_json(data_path + "ArifPupil.txt")
+    ashok_pupil = read_json(data_path + "AshokPupil.txt")
+    gowthom_pupil = read_json(data_path + "GowthomPupil.txt")
+    josephin_pupil = read_json(data_path + "JosephinPupil.txt")
+    raghu_pupil = read_json(data_path + "RaghuPupil.txt")
 
     # add the pattern_name information to the pupil_data(*_p)
     anoth_pupil = add_pattern_name_to_ts(anoth_distance, anoth_pupil)
@@ -228,7 +235,7 @@ if __name__ == '__init__':
     josephin_pupil = add_pattern_name_to_ts(josephin_distance, josephin_pupil)
     raghu_pupil = add_pattern_name_to_ts(raghu_distance, raghu_pupil)
 
-    # Build the Dataframe
+    # build the Dataframe
     data_generator = [
         [anoth_distance, arif_distance, ashok_distance, gowthom_distance, josephin_distance, raghu_distance],
         ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin", "Raghu"],
@@ -236,7 +243,8 @@ if __name__ == '__init__':
 
     confirm_pattern_matching = False
 
-    print("number of collections (participants): ", len(data_generator[0]), end="\n\n")
+    print("number of participants: ", len(data_generator[0]), end="\n")
+    print("\nPARTICIPANTS: ", PARTICIPANTS)
 
     df_concat = pd.DataFrame()
 
@@ -255,12 +263,51 @@ if __name__ == '__init__':
         # put everything in one dataframe: df_distance then concat
         df_distance["ts_pupil"] = df_pupil["ts_pupil"]
         df_distance["participant_name"] = participant_name
-        print(f"{len(participant_data_distance)} rows are being been added for {participant_name}...")
+        if VERBOSE_LEVEL > 0:
+            print(f"{len(participant_data_distance)} rows are being been added for {participant_name}...")
         df_concat = pd.concat([df_concat, df_distance], ignore_index=True) if ix > 0 else df_distance
 
-    print(f"\nDataFrame has now {len(df_concat.ts_distance)} samples...")
+    print(f"\nDataFrame has {len(df_concat.ts_distance)} samples...")
 
     df_concat = df_concat[["participant_name", "pattern_name", "ts_distance", "ts_pupil"]]
-    print(df_concat.head(), df_concat.tail())
 
+    if "binary" in CLASSIFIER_MODE:
+        pass
+
+    else:
+        # normalization
+        if VERBOSE_LEVEL > 0:
+            print("checking sequence lenghts matching (first 20)...\n")
+
+            for ix, (d, p) in enumerate(zip(df_concat['ts_distance'], df_concat['ts_pupil'])):
+                print(f"lenght of sequence in ts_distance: {len(d)}, lenght of sequence in ts_pupil: {len(p)}", end=" ")
+                print_bold(len(d) == len(p))
+                if ix == 20:
+                    break
+
+        print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df_concat['ts_distance'].tolist()))
+        print("min lenght in ts_pupil = ", min_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+        print("max lenght in ts_distance = ", max_listoflists_lenght(df_concat['ts_distance'].tolist()))
+        print("max lenght in ts_pupil = ", max_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+
+        # apply normalization to the DataFrame (value and lenght)
+        df_concat.ts_distance = df_concat.ts_distance.apply(normalize)
+        df_concat.ts_pupil = df_concat.ts_pupil.apply(normalize)
+        print("\nthe data has been normalized by value, mean=0, std=1")
+
+        df_concat.ts_distance = normalize_lenghts(df_concat.ts_distance.tolist())
+        df_concat.ts_pupil = normalize_lenghts(df_concat.ts_pupil.tolist(),
+                                               max_lenght=max_listoflists_lenght(df_concat['ts_distance']))
+        print("the data has been normalized by lenght (stretched to the max lenght)")
+
+        if VERBOSE_LEVEL > 0:
+            print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df_concat['ts_distance'].tolist()))
+            print("min lenght in ts_pupil = ", min_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+            print("max lenght in ts_distance = ", max_listoflists_lenght(df_concat['ts_distance'].tolist()))
+            print("max lenght in ts_pupil = ", max_listoflists_lenght(df_concat['ts_pupil'].tolist()))
+
+        if PLOT:
+            gowthom_distance = get_distance_in_dataframe(df_concat, "Gowthom")
+            fig = plot_collection("pattern5", gowthom_distance)
+            fig.show(renderer="browser")
 
