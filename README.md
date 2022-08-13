@@ -22,4 +22,4 @@
 ## How to use this repository?
 
 ### Requirements
-Is recommended to use a version of Python superior 
+Is recommended to use a version of Python superior than 3.7.
