@@ -5,13 +5,16 @@
 <p align="center">
   <img width="740" height="416" src=".media/experimental_setup.png">
 </p>
-
+<p align="center">
+  <sub>source: https://www.tobii.com/group/about/this-is-eye-tracking/
+  </p>
+  
 ### Overview: Pipeline description for classifying time series data
 <sup>source: [IBM/what-is-time-series-classification](https://developer.ibm.com/learningpaths/get-started-time-series-classification-api/what-is-time-series-classification/)
   
 <sup>For time series classification, the data set is typically split into three sets of data: the **training set**, the holdout or **validation set**, and the **test set**. The **training set** is used initially to set the parameters of the algorithms that are chosen to attack the problem. The **validation set** is then used to choose which algorithm performs the best. Finally, the chosen algorithm is used to score the **test set** and determine the quality of the classifier. Time series data is temporally ordered and sequential, this is important when deciding on the classification algorithm.
   
-<sup>Often with real-world data collection, the length of the samples in a time series is different. This can be problematic for some classifiers such as *dynamic time warping* when a warping window smaller than the difference in sample length is used, or *nearest neighbor* using *Euclidian distance*. In the case of **varying length samples**, multiple techniques are available for scaling the data to equal lengths, adding low-noise prefixes or suffixes to the shorter samples, for example, while at the same time preserving the class of the data sample.</font>
+<sup>Often with real-world data collection, the length of the samples in a time series is different. This can be problematic for some classifiers such as *dynamic time warping* when a warping window smaller than the difference in sample length is used, or *nearest neighbor* using *Euclidian distance*. In the case of **varying length samples**, multiple techniques are available for scaling the data to equal lengths, adding low-noise prefixes or suffixes to the shorter samples, for example, while at the same time preserving the class of the data sample.
 
 <sup>In addition to unequal sample lengths, **data-gaps** are not handled well by most time series classification algorithms. Null values or not-a-number (NaN) values should be replaced manually in the data with a value that is based on linear interpolation from the immediately adjacent values.
 
