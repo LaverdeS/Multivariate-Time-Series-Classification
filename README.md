@@ -36,6 +36,6 @@ This is done for both the information about `ts_distance` and `ts_pupil`.
 - `classifier.py`: This script contains the general pipeline for reading the data, transforming it, fitting a ML model against it, and evaluating its performance.
 
 #### Example execution
-- Run aggragator.py and store data in .data
+- Run aggregator.py and store data in .data
 - Run classifier.py by selecting the dataset, the classifier_type, the model and dataset and the hyperparameters configuration.
 - todo: evaluate.py
