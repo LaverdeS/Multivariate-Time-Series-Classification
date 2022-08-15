@@ -611,7 +611,7 @@ if __name__ == '__main__':
         logger=logger,
         callbacks=checkpoint_callback,
         max_epochs=N_EPOCHS,
-        accelerator="gpu",  # gpu
+        accelerator="cpu",  # gpu
         devices=1,
         enable_progress_bar=True,
         log_every_n_steps=1
