@@ -34,11 +34,17 @@ Python version 3.7 or superior is strongly recommended. The requirements can be 
 ## How to use this repository?
 Some sample data can be found inside the `.data` folder and the original plots of the data inside `.media`. The folowing is a short description of each of the `*.py` files inside this repository:
 
-- `aggregator.py`: Every single experiment's output (signals for --> user A drawing pattern X) is originally a separate `*.txt` file.  This script reads and aggregates each single file inside a parcipant's data-folder into a single file with the structure:
+- `aggregator.py`: Every single experiment's output signals for a single user drawing one pattern is originally stored on a separate `*.txt` file.  This script reads and aggregates each single file inside a parcipant's data-folder into a single file with the structure:
 
 ```[['pattern_name', List(time_series)]]```
 
 This is done for both the information about `ts_distance` and `ts_pupil`.
+  
+- `dataset.py`: dataset construction options for several classifier types...
+  
+- `preprocessing.py`: preprocessing...
+  
+- `feature_engineering.py`: feature_engineering...
 
 - `classifier.py`: This script contains the general pipeline for reading the data, transforming it, fitting a ML model against it, and evaluating its performance.
 
