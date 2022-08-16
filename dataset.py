@@ -8,6 +8,9 @@ import warnings
 
 from preprocessing import normalize_data, normalize, normalize_single_lenght
 
+
+float_formatter = "{:.4f}".format
+np.set_printoptions(formatter={'float_kind': float_formatter})
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 PARTICIPANTS = ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin", "Raghu"]
