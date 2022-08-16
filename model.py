@@ -10,6 +10,7 @@ import argparse
 from torch.nn.modules import dropout
 from os import cpu_count, environ
 from torch.utils.data import Dataset, DataLoader
+from torchmetrics.functional import accuracy
 from os import cpu_count
 
 
@@ -30,6 +31,7 @@ def init_weights(m, verbose=False):
     torch.nn.init.xavier_uniform_(m.weight)
     m.bias.data.fill_(0.01)
     print("Linear module weights and biases initialized")
+
 
 class UserDataset(Dataset):
 

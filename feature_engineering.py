@@ -129,7 +129,7 @@ Ergo, the total number of samples for my new dataframes X and y is {len(PARTICIP
     test_sequences = [(sequence, label) for sequence, label in zip(test_sequences, ytest)]
     val_sequences = [(sequence, label) for sequence, label in zip(val_sequences, yval)]
 
-    return train_sequences, test_sequences, val_sequences
+    return train_sequences, test_sequences, val_sequences, FEATURE_COLUMNS, label_encoder, pattern_encoder
 
 
 def parse_arguments():
@@ -160,5 +160,5 @@ if __name__ == "__main__":
         print()
 
     # if "raw" in data_
-    train_sequences, test_sequences, val_sequences = feature_selection(df)
+    train_sequences, test_sequences, val_sequences, *_ = feature_selection(df)
     print_bold("\ndone...")
