@@ -1,23 +1,32 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import argparse
+
 from tqdm import tqdm
 from preprocessing import max_listoflists_lenght, min_listoflists_lenght
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 
-
 PARTICIPANTS = ["Anoth", "Arif", "Ashok", "Gowthom", "Josephin", "Raghu"]
 CLASSIFIER_MODES = "pattern-agnostic", "pattern-specific", "pattern-agnostic-binary", "pattern-specific-binary"
 CLASSIFIER_MODE = CLASSIFIER_MODES[0]
+DATA_PATH = '.data/norm_dataframe.csv'
 VERBOSE_LEVEL = 1
 
 
 def print_bold(text): print(f"\033[1m {text} \033[0m")
 
 
+def str2list(l):
+    l = l.replace("[", "")
+    l = l.replace("]", "")
+    l = l.replace("\n", "")
+    l = l.split()
+    return l
+
+
 def feature_selection(df_concat):
     # feature selection --> explode the DataFrame ts_distance and ts_pupil
-
     for ix, series in tqdm(df_concat.iterrows(), total=len(df_concat)):
         series_df_distance = pd.DataFrame(series.ts_distance, columns=["trace_difference"])
         series_df_pupil = pd.DataFrame(series.ts_pupil, columns=["pupil_dilation"])
@@ -51,13 +60,13 @@ def feature_selection(df_concat):
 
     if VERBOSE_LEVEL > 0:
         print(
-            f"\nConsidering {len(PARTICIPANTS)} participants with {90} experiments each, we have {len(PARTICIPANTS) * 90} number of samples or single graphs.\n\
-            Naturally the lenght of the time-series for a single experiment is dependent on the speed of the user at that pattern attempt. \n\
-            The absolute minimum lenght for this data collection is {min_listoflists_lenght(df_concat.ts_distance.tolist())} and the maximum {max_listoflists_lenght(df_concat.ts_distance.tolist())}. \n\
-            After normalization, all time series have the same lenght: {max_listoflists_lenght(df_concat.ts_distance.tolist())}. \n\
-            Therefore, each equal-lenght time series (one single row) can be exploded into {max_listoflists_lenght(df_concat.ts_distance.tolist())} rows. \n\
-            In order to identify the original row index before exploding, a new column 'series_id' is added to de dataframe. \n\
-            Ergo, the total number of samples for my new dataframes X and y is {len(PARTICIPANTS) * 90 * max_listoflists_lenght(df_concat.ts_distance.tolist())}.")
+            f"\nConsidering {len(PARTICIPANTS)} participants with {90} experiments each, we have {len(PARTICIPANTS) * 90} number of samples or single graphs. \
+Naturally the lenght of the time-series for a single experiment is dependent on the speed of the user at that pattern attempt. \
+The absolute minimum lenght for this data collection is {min_listoflists_lenght(df_concat.ts_distance.tolist())} and the maximum {max_listoflists_lenght(df_concat.ts_distance.tolist())}. \n\
+After normalization, all time series have the same lenght: {max_listoflists_lenght(df_concat.ts_distance.tolist())}. \
+Therefore, each equal-lenght time series (one single row) can be exploded into {max_listoflists_lenght(df_concat.ts_distance.tolist())} rows. \
+In order to identify the original row index before exploding, a new column 'series_id' is added to de dataframe. \n\
+Ergo, the total number of samples for my new dataframes X and y is {len(PARTICIPANTS) * 90 * max_listoflists_lenght(df_concat.ts_distance.tolist())}.\n")
 
         print("data class distribution after transformation...\n")
         print(y.participant_name.value_counts())
@@ -123,8 +132,33 @@ def feature_selection(df_concat):
     return train_sequences, test_sequences, val_sequences
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--verbosity", help="define the verbosity level", type=int, default=1)
+    parser.add_argument("-d", "--data_path", help="relative path of the .csv file", type=str, default=DATA_PATH)
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    print_bold("\n have a coffee...")
-    pass
-    # df = get_dataframe()
-    # train_seq, test, val = feature_selection((df))
+    args = parse_arguments()
+    VERBOSE_LEVEL = args.verbosity
+    DATA_PATH = args.data_path
+    print(f"\nverbose_level: ", VERBOSE_LEVEL)
+    print(f"reading data from {DATA_PATH}\n")
+
+    df = pd.read_csv(DATA_PATH)
+    if VERBOSE_LEVEL > 0:
+        print("sample ts_distance prior[0:20]: ", end="")
+        print(df.ts_distance.tolist()[0][0:20])
+
+    df.ts_distance = df.ts_distance.apply(str2list)
+    df.ts_pupil = df.ts_pupil.apply(str2list)
+
+    if VERBOSE_LEVEL > 0:
+        print("\nsample ts_distance post[0:20]: ", end="")
+        print(df.ts_distance.tolist()[0][0:20])
+        print()
+
+    # if "raw" in data_
+    train_sequences, test_sequences, val_sequences = feature_selection(df)
+    print_bold("\ndone...")
