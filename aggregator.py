@@ -4,7 +4,7 @@ from os import walk
 from tqdm import tqdm
 
 DATA_IN_PATH = 'C:/Users/lavml/Desktop/Freelance/TS/.data/pupil/'
-DATA_OUT_PATH = 'C:/Users/lavml/Documents/GitHub/Multivariate-Time-Series-Classification/.data/'
+DATA_OUT_PATH = '.data/'
 
 
 def read_json(path):
