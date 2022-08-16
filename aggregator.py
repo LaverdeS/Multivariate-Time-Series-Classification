@@ -1,9 +1,10 @@
+import json
+import argparse
 from os import walk
 from tqdm import tqdm
-import json
 
-
-DATA_PATH = 'C:/Users/lavml/Desktop/Freelance/TS/.data/pupil/'
+DATA_IN_PATH = 'C:/Users/lavml/Desktop/Freelance/TS/.data/pupil/'
+DATA_OUT_PATH = 'C:/Users/lavml/Documents/GitHub/Multivariate-Time-Series-Classification/.data/'
 
 
 def read_json(path):
@@ -12,12 +13,12 @@ def read_json(path):
 
 
 def save_json(data, name):
-    with open(DATA_PATH + name + 'Pupil.txt', 'w') as f:
+    with open(DATA_OUT_PATH + name + 'Pupil.txt', 'w') as f:
         json.dump(data, f)
 
 
 def extract_pupil_data_for_user(name=''):
-    filenames = next(walk(DATA_PATH + name), (None, None, []))[2]
+    filenames = next(walk(DATA_IN_PATH + name), (None, None, []))[2]
     return filenames
 
 
@@ -26,7 +27,7 @@ def read_filenames_to_list_of_lists(filenames, name):
     for filename in tqdm(filenames):
         if filename == '.DS_Store':
             continue
-        d_data = read_json(DATA_PATH + name + '/' + filename)['Items']
+        d_data = read_json(DATA_IN_PATH + name + '/' + filename)['Items']
         series = []
         for sample in d_data:
             series.append(sample['both_pupils_valid'])
@@ -34,7 +35,17 @@ def read_filenames_to_list_of_lists(filenames, name):
     return user_data
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--data_in", help="the path from where the raq data will be read.", default=DATA_IN_PATH)
+    parser.add_argument("-o", "--data_out", help="the path to where the data aggregation will be stored", default=DATA_OUT_PATH)
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
+    args = parse_arguments()
+    DATA_IN_PATH = args.data_in
+    DATA_OUT_PATH = args.data_out
 
     Anoth_filenames = extract_pupil_data_for_user('Anoth')
     anoth = read_filenames_to_list_of_lists(Anoth_filenames, 'Anoth')
@@ -60,3 +71,5 @@ if __name__ == '__main__':
     save_json(anoth, 'Gowthom')
     save_json(anoth, 'Josephin')
     save_json(anoth, 'Raghu')
+
+    # todo: generalize, create method to walk the folder and get participant_names
