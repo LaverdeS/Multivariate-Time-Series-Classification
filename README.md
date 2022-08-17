@@ -74,3 +74,11 @@ This is done for both the information about `ts_distance` and `ts_pupil`.
 ## Exploratory Time Series Data Analysis (EDA)
 Implementing...
 
+## Algorithms Overview
+The following are the most common approaches for time-series classification. In **bold**: currently available models.
+ - Distance-based approaches
+ - Shapelet
+ - Model Ensembles
+ - Dictionary approaches
+ - Interval-based approaches
+ - **Deep Learning**: LSTM
