@@ -1,4 +1,21 @@
-<h1 align="center">Multivariate-Time-Series-Classification</h1>
+<h1>
+ <p align="center">
+  <img width="400" height="400" src=".media/GazeDefy.png">
+</p>
+ </h1>
+
+<h4 align="center">Multivariate Time Series Classification for Gaze Tracking Data</h4>
+
+<p align="center">
+ <a href="https://www.python.org/downloads/release/python-370/">
+      <img src="https://img.shields.io/badge/python-3.7-brightgreen.svg">
+  </a>
+ <a href="https://saythanks.io/to/lavmlk20201">
+      <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
+  </a>
+ <a href="https://www.buymeacoffee.com/lavmlk2020B" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height=22 width=110</a>
+ 
+</p>
  
 - Explore the classification of `participant_name` by the means of time-series gaze `ts_distance` and pupil dilation `ts_pupil` information.
 - The dataset was collected from users asked to draw 3-segments patterns with their eyes. (the details for the data-collection are not part of this repository).
