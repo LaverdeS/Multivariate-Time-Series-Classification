@@ -21,7 +21,7 @@
 - The dataset was collected from users asked to draw 3-segments patterns with their eyes. (the details for the data-collection are not part of this repository).
 
 <p align="center">
-  <img width="740" height="416" src=".media/experimental_setup.png">
+  <img width="700" height="390" src=".media/experimental_setup.png">
 </p>
 <p align="center">
   <sub>source: https://www.tobii.com/group/about/this-is-eye-tracking/
