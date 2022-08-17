@@ -1,4 +1,5 @@
-# Multivariate-Time-Series-Classification 
+<h1 align="center">Multivariate-Time-Series-Classification</h1>
+ 
 - Explore the classification of `participant_name` by the means of time-series gaze `ts_distance` and pupil dilation `ts_pupil` information.
 - The dataset was collected from users asked to draw 3-segments patterns with their eyes. (the details for the data-collection are not part of this repository).
 
