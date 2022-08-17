@@ -13,8 +13,8 @@
  <a href="https://saythanks.io/to/lavmlk20201">
       <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
   </a>
- <a href="https://www.buymeacoffee.com/lavmlk2020B" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height=22 width=110</a>
- 
+ <a href="https://www.buymeacoffee.com/lavmlk2020B" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height=22 width=110>
+  </a>
 </p>
  
 - Explore the classification of `participant_name` by the means of time-series gaze `ts_distance` and pupil dilation `ts_pupil` information.
