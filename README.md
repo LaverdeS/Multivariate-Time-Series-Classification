@@ -71,7 +71,7 @@ This is done for both the information about `ts_distance` and `ts_pupil`.
 - Run `classifier.py by` selecting the dataset, the classifier_type, the model and dataset and the hyperparameters configuration.
 - todo: `evaluate.py`
 
-## Exploratory Time Series Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 Implementing...
 
 ## Algorithms Overview
@@ -81,4 +81,4 @@ The following are the most common approaches for time-series classification. In 
  - Model Ensembles
  - Dictionary approaches
  - Interval-based approaches
- - **Deep Learning**: LSTM
+ - **Deep Learning**: LSTM, CNN_Rocket
