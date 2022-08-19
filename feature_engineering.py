@@ -22,6 +22,7 @@ def str2list(l):
     l = l.replace("]", "")
     l = l.replace("\n", "")
     l = l.split()
+    l = [float(i) for i in l]
     return l
 
 
