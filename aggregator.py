@@ -85,27 +85,3 @@ if __name__ == '__main__':
         x, y = read_filenames_to_list_of_lists(filenames, participant_name, args.field)
         save_json(x, participant_name + '_x', 'coord.txt')
         save_json(y, participant_name + '_y', 'coord.txt')
-
-    # Arif_filenames = extract_data_for_user('Arif')
-    # arif = read_filenames_to_list_of_lists(Arif_filenames, 'Arif', 'both_pupils_valid')
-    #
-    # Ashok_filenames = extract_data_for_user('Ashok')
-    # ashok = read_filenames_to_list_of_lists(Ashok_filenames, 'Ashok', 'both_pupils_valid')
-    #
-    # Gowthom_filenames = extract_data_for_user('Gowthom')
-    # gowthom = read_filenames_to_list_of_lists(Gowthom_filenames, 'Gowthom', 'both_pupils_valid')
-    #
-    # Josephin_filenames = extract_data_for_user('Josephin')
-    # josephin = read_filenames_to_list_of_lists(Josephin_filenames, 'Josephin', 'both_pupils_valid')
-    #
-    # Raghu_filenames = extract_data_for_user('Raghu')
-    # raghu = read_filenames_to_list_of_lists(Raghu_filenames, 'Raghu', 'both_pupils_valid')
-    #
-    # save_json(anoth, 'Anoth', 'Pupil.txt')
-    # save_json(anoth, 'Arif', 'Pupil.txt')
-    # save_json(anoth, 'Ashok', 'Pupil.txt')
-    # save_json(anoth, 'Gowthom', 'Pupil.txt')
-    # save_json(anoth, 'Josephin', 'Pupil.txt')
-    # save_json(anoth, 'Raghu', 'Pupil.txt')
-
-    # todo: generalize, create method to walk the folder and get participant_names
