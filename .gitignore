@@ -128,3 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea
+.media/logo_design.pptx
+checkpoints/
+logs/
