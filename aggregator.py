@@ -9,6 +9,7 @@ DATA_IN_PATH = '.data/coords/'
 # DATA_IN_PATH = 'C:/Users/lavml/Desktop/Freelance/TS/.data/pupil/'
 DATA_OUT_PATH = '.data/'
 FIELDS = ['gaze_valid', 'both_pupils_valid']
+RESOLUTION = 3  # number of decimals for float format
 
 
 def read_json(path):
@@ -53,15 +54,15 @@ def read_filenames_to_list_of_lists(filenames, name, path, field: str):
                     print("______________________________data path error_______________________________", sample)
                     continue
                 # print(sample_f)
-                sample_x = sample_f['x']
-                sample_y = sample_f['y']
+                sample_x = round(float(sample_f['x']), RESOLUTION)
+                sample_y = round(float(sample_f['y']), RESOLUTION)
                 series_x.append(sample_x)
                 series_y.append(sample_y)
             user_data_x.append(series_x)
             user_data_y.append(series_y)
         else:
             for sample in d_data:
-                series.append(sample[field])
+                series.append(round(float(sample[field]), RESOLUTION))
             user_data.append(series)
     if field == 'gaze_valid':
         return user_data_x, user_data_y
