@@ -21,9 +21,11 @@ def save_json(data, name, ending: str):
         json.dump(data, f)
 
 
-def extract_data_for_user(name=''):
-    filenames = next(walk(DATA_IN_PATH + name), (None, None, []))[2]
+def extract_data_for_user(name='', path=''):
+    filenames = next(walk(path + name), (None, None, []))[2]
     filenames = [f for f in filenames if "DS_Store" not in f]
+    filenames = [f for f in filenames if "Details" not in f]
+    filenames = [f for f in filenames if "Attempts" not in f]
     if "GazeData" in filenames[0]:
         samples_ix = [int(s.replace(".txt", "").replace("GazeData", "")) for s in filenames]
     else:
@@ -34,13 +36,13 @@ def extract_data_for_user(name=''):
     return filenames
 
 
-def read_filenames_to_list_of_lists(filenames, name, field: str):
+def read_filenames_to_list_of_lists(filenames, name, path, field: str):
     user_data = []
     user_data_x, user_data_y = [], []
     for filename in tqdm(filenames):
         if filename == '.DS_Store':
             continue
-        d_data = read_json(DATA_IN_PATH + name + '/' + filename)['Items']
+        d_data = read_json(path + name + '/' + filename)['Items']
         series = []
         series_x, series_y = [], []
         if field == 'gaze_valid':
@@ -82,7 +84,6 @@ if __name__ == '__main__':
     args = parse_arguments()
     DATA_IN_PATH = args.data_in
     DATA_OUT_PATH = args.data_out
-
     print("reading from: ", DATA_IN_PATH)
     print("field: ", args.field)
 
@@ -91,14 +92,16 @@ if __name__ == '__main__':
     print()
     for ix, participant_name in enumerate(participants):
         print(participant_name)
-        filenames = extract_data_for_user(participant_name)
+        filenames = extract_data_for_user(participant_name, path=args.data_in)
         try:
-            x, y = read_filenames_to_list_of_lists(filenames, participant_name, args.field)
+            x, y = read_filenames_to_list_of_lists(filenames, participant_name, args.data_in, args.field)
             save_json(x, participant_name + '_x', 'coord.txt')
             save_json(y, participant_name + '_y', 'coord.txt')
         except ValueError:
-            data = read_filenames_to_list_of_lists(filenames, participant_name, args.field)
+            data = read_filenames_to_list_of_lists(filenames, participant_name, args.data_in, args.field)
             save_json(data, participant_name + 'Pupil', '.txt')
 
 
 # arif second gaze sample pattern 4 [0] is 0.273157 not 0.263006!!!
+
+'C:/Users/lavml/Desktop/Freelance/TS/.data/pupil'

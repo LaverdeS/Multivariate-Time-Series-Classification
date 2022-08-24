@@ -1,0 +1,1054 @@
+{
+    "Items": [
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_8",
+                "circle_9",
+                "circle_6",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_6",
+                "circle_3",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_6",
+                "circle_9",
+                "circle_8",
+                "circle_7"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_5",
+                "circle_9",
+                "circle_8",
+                "circle_7",
+                "circle_3"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_4",
+                "circle_7",
+                "circle_5",
+                "circle_3",
+                "circle_6",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        },
+        {
+            "pattern": [
+                "circle_1",
+                "circle_2",
+                "circle_3",
+                "circle_5",
+                "circle_7",
+                "circle_8",
+                "circle_9"
+            ],
+            "wrongAttempts": 0
+        }
+    ]
+}
