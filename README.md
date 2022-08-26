@@ -43,15 +43,19 @@ The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', '
 
 ## Requirements
 Python version 3.7 or superior is strongly recommended. The requirements can be found inside `requirements.txt` and can be install running the command:
-
-```!pip install --quiet -r requirements.txt```
+ 
+```{python}
+!pip install --quiet -r requirements.txt
+```
 
 ## How to use this repository?
 Some sample data can be found inside the `.data` folder and the original plots of the data inside `.media`. The folowing is a short description of each of the `*.py` files inside this repository:
 
 - `aggregator.py`: Every single experiment's output signals for a single user drawing one pattern is originally stored on a separate `*.txt` file.  This script reads and aggregates each single file inside a parcipant's data-folder into a single file with the structure:
 
-```[['pattern_name', List(time_series)]]```
+```{python}
+ [['pattern_name', List(time_series)]]
+ ```
 
 This is done for both the information about `ts_distance` and `ts_pupil`.
   
