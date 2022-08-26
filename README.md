@@ -17,8 +17,15 @@
   </a>
 </p>
  
-- Explore the classification of `participant_name` by the means of time-series gaze `ts_distance` and pupil dilation `ts_pupil` information.
-- The dataset was collected from users asked to draw 3-segments patterns with their eyes. (the details for the data-collection are not part of this repository).
+The purpose of this repository is to provide the guidelines and a framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, pipeline was design with scalability to other multivariate time-series classification tasks and other datasets. 
+
+The task: 
+`create a system capable of classifying users by finding an "eye-signature" in eye-tracking data.`
+
+The data collection experiment: 
+`each participant will have to draw each of the 6 patterns 15 times with their gaze movement.`
+
+The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
 
 <p align="center">
   <img width="700" height="390" src=".media/experimental_setup.png">
