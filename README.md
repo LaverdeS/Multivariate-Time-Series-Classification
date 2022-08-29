@@ -125,3 +125,6 @@ The following are the most common approaches for time-series classification. In 
 </p>
 
 ## LICENSE
+
+The [GNU General Public License](): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. Please hit the Buy Me a Coffe button in order to donate to the creator.
+  
