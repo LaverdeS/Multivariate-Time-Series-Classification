@@ -4,7 +4,7 @@
 </p>
  </h1>
 
-<h4 align="center">Multivariate Time Series Classification for Gaze Tracking Data</h4>
+<h4 align="center">Multivariate Time Series Classification for Eye Tracking Data</h4>
 
 <p align="center">
  <a href="https://www.python.org/downloads/release/python-370/">
