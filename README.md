@@ -115,3 +115,13 @@ The following are the most common approaches for time-series classification. In 
 <p align="center">
   <img width="500" height="370" src=".media/confusion_matrix_LSTM_pattern_agnostic_1204iter.PNG">
 </p>
+
+
+## Buy Me a Coffee
+<p>
+  </a>
+ <a href="https://www.buymeacoffee.com/lavmlk2020B" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height=42 width=160>
+  </a>
+</p>
+
+## LICENSE
