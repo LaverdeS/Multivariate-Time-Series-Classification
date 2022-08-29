@@ -75,7 +75,13 @@ This is done for both the information about `ts_distance` and `ts_pupil`.
 ## Exploratory Data Analysis (EDA)
 In total, 30 people participated in the test (data collection) but for the sake of cleaner visualizations, the notebooks and the plots that are shown here are using only data of 7 participants. The classifications reports and other outputs are for models that were trained using the data of these 6 participants as well.
  
-Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments. 
+Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments:
+ 
+<h1>
+<p align="center">
+ <img width="300" height="300" src=".media/original_dataframe.png">
+</p>
+</h1>
 
 ## Algorithms Overview
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
