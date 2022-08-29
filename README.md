@@ -105,3 +105,13 @@ The following are the most common approaches for time-series classification. In 
  - Dictionary approaches
  - Interval-based approaches
  - **Deep Learning**: LSTM, CNN_Rocket
+
+## Evaluation
+
+### LSTM
+
+#### Confusion Matrix
+
+<p align="center">
+  <img width="500" height="370" src=".media/confusion_matrix_LSTM_pattern_agnostic_1204iter.PNG">
+</p>
