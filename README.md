@@ -79,7 +79,7 @@ Originally, the data is composed by time-series gaze-shift and pupil-diameter re
  
 <h1>
 <p align="center">
- <img width="300" height="300" src=".media/original_dataframe.png">
+ <img width="300" height="300" src="tree/main/.media/original_dataframe.PNG">
 </p>
 </h1>
 
