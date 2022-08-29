@@ -21,12 +21,12 @@ The purpose of this repository is to provide the guidelines and a framework for 
 
 The task:
 <p align="center">
-<i>"To create a system capable of classifying users by finding an "eye-signature" in eye-tracking data".</i>
+<i><b>"To create a system capable of classifying users by finding an "eye-signature" in eye-tracking data".</b></i>
 </p>
 
 The data collection experiment: 
 <p align="center">
-<i>"Each participant will have to draw each of the 6 patterns 15 times with their gaze movement".</i>
+<i><b>"Each participant will have to draw each of the 6 patterns 15 times with their gaze movement".</b></i>
 </p>
 
 The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
