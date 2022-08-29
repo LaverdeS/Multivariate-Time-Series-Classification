@@ -75,13 +75,21 @@ This is done for both the information about `ts_distance` and `ts_pupil`.
 ## Exploratory Data Analysis (EDA)
 In total, 30 people participated in the test (data collection) but for the sake of cleaner visualizations, the notebooks and the plots that are shown here are using only data of 7 participants. The classifications reports and other outputs are for models that were trained using the data of these 6 participants as well.
  
-Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments:
+Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments. The data is presented with float resolution of 3 decimals as an approximation and a hyperparameter. The data with *float_resolution = 3*:
+
+![Dataframe](./.media/original_dataframe.PNG)
  
-<h1>
-<p align="center">
- <img width="300" height="300" src="tree/main/.media/original_dataframe.PNG">
-</p>
-</h1>
+One important part of analysing the data is to consider adding more features to the data so is more rich. More features in general means that the algorithm would have more information to find a patterns assosiated with the target label, which is the participant_name in our case; however, some features could be misleading for the classifier forcing to fit into noise and making it hardly optimal predicting the label of unseen data.
+ 
+In this case, the difference between the gaze-shift or eye-movement drawing a pattern and the ideal pattern description is added as an extra feature and called ts_distance. The details of how this metric is calculated can be found in the notebook called `DistanceAnalysis.ipynb`. The following plots show all the ts_distance calculations for participant5 + pattern4 and participant7 + pattern2:
+ 
+![image](all_distance_compare_2participants.png)
+ 
+Here we can clearly see that the experiments present variability in lenght and in value of the readings|calculations. Some experiments can be abnomaly long or posses values that are absurdly high. These **outliers** of the data should be detected and removed from the data that is going to be fed to a classifier. Consequently, another feature related to the speed in which a parcipant succesfully draws a pattern is added to the data. This feature is called the series_original_lenght and it is integer number of data points taken for each experiment: the lower the number of data points, the faster the participant for that run. One kind of ouliers is then, the experiments in which a participant takes too long performing an attempt of drawing a specific pattern.
+ 
+One very simple statistical method to detect outliers is:....
+ 
+![image](outliers.png)
 
 ## Algorithms Overview
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
