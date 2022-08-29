@@ -77,23 +77,23 @@ In total, 30 people participated in the test (data collection) but for the sake 
  
 Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments. The data is presented with float resolution of 3 decimals as an approximation and a hyperparameter. The data with *float_resolution = 3*:
 
-![Dataframe](./.media/original_dataframe.PNG)
+![dataframe](./.media/original_dataframe.PNG)
  
 One important part of analysing the data is to consider adding more features to the data so is more rich. More features in general means that the algorithm would have more information to find a patterns assosiated with the target label, which is the participant_name in our case; however, some features could be misleading for the classifier forcing to fit into noise and making it hardly optimal predicting the label of unseen data.
  
 In this case, the difference between the gaze-shift or eye-movement drawing a pattern and the ideal pattern description is added as an extra feature and called ts_distance. The details of how this metric is calculated can be found in the notebook called `DistanceAnalysis.ipynb`. The following plots show all the ts_distance calculations for participant5 + pattern4 and participant7 + pattern2:
  
-![image](./.media/distance_samples.png)
+![distance](./.media/distance_samples.png)
  
 Here we can clearly see that the experiments present variability in lenght and in value of the readings|calculations. Some experiments can be abnomaly long or posses values that are absurdly high. An outlier is a data point that lies outside the overall pattern in a distribution. These **outliers** of the data should be detected and removed from the data that is going to be fed to a classifier. Consequently, another feature related to the speed in which a parcipant succesfully draws a pattern is added to the data. This feature is called the series_original_lenght and it is integer number of data points taken for each experiment: the lower the number of data points, the faster the participant for that run. One kind of ouliers is then, the experiments in which a participant takes too long performing an attempt of drawing a specific pattern.
  
 One very simple statistical method to detect outliers is [the interquartile range rule](https://youtu.be/FRlTh5HQORA). The interquartile range shows how the data is spread about the median and it's calculated by substracting the third and the first quatiles -> `IQR = Q3 - Q1`, where the third and first quartiles represent the number from which 75% and 25% of our data falls below. The following plot shows the extreme outliers in red for the lenghts of the time-series for each experiment after purging the data from zero values (blinking values in pupil diameter readings):
  
-![image](./.media/ouliers.png)
+![outliers](./.media/ouliers.png)
  
  The dataframe after normalizing all the data by lenght (all experiments stretched to the max lenght after outlier removal) and with the additional features is then:
  
-![image](./.media/dataframe_normal_after_outlier_removal.PNG)
+![dataframe_post](./.media/dataframe_normal_after_outlier_removal.PNG)
 
 ## Algorithms Overview
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
