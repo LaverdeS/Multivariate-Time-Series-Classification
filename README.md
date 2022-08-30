@@ -96,7 +96,7 @@ One very simple statistical method to detect outliers is [the interquartile rang
  Another kind of information that could be useful to detect outlier are the max values for the distance metric and the pupil diameter readings. The following plots show the outliers' indices in x and y coordinates of the gaze-movement.
  
  <p align="center">
-  <img width="740" height="540" src=".media/outliers_value.png">
+  <img width="700" height="570" src=".media/outliers_value.png">
 </p>
  
  The dataframe after normalizing all the data by lenght (all experiments stretched to the max lenght after outlier removal) and with the additional features is then:
