@@ -116,6 +116,10 @@ The following are the most common approaches for time-series classification. In 
   <img width="850" height="370" src=".media/confusion_matrix_LSTM_report.png">
 </p>
 
+## Fine-Tuning
+### Hyperparameters
+[list]
+
 ## License
 
 The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/blob/main/LICENSE): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. Please hit the [Buy Me a Coffe!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png) button in order to donate to the creator.
