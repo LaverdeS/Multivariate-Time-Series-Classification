@@ -113,7 +113,7 @@ The following are the most common approaches for time-series classification. In 
 #### Confusion Matrix
 
 <p align="center">
-  <img width="500" height="370" src=".media/confusion_matrix_LSTM_report.png">
+  <img width="850" height="370" src=".media/confusion_matrix_LSTM_report.png">
 </p>
 
 ## License
