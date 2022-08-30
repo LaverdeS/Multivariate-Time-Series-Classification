@@ -85,7 +85,7 @@ In this case, the difference between the gaze-shift or eye-movement drawing a pa
  
 ![distance](./.media/distance_samples.png)
  
-Here we can clearly see that the experiments present variability in lenght and in value of the readings|calculations. Some experiments can be abnomaly long or posses values that are absurdly high. An outlier is a data point that lies outside the overall pattern in a distribution. These **outliers** of the data should be detected and removed from the data that is going to be fed to a classifier. Consequently, another feature related to the speed in which a parcipant succesfully draws a pattern is added to the data. This feature is called the series_original_lenght and it is integer number of data points taken for each experiment: the lower the number of data points, the faster the participant for that run. One kind of ouliers is then, the experiments in which a participant takes too long performing an attempt of drawing a specific pattern.
+Here we can clearly see that the experiments present variability in lenght and in value of the readings | calculations. Some experiments can be abnomaly long or posses values that are absurdly high. An outlier is a data point that lies outside the overall pattern in a distribution. These **outliers** of the data should be detected and removed from the data that is going to be fed to a classifier. Consequently, another feature related to the speed in which a parcipant succesfully draws a pattern is added to the data. This feature is called the series_original_lenght and it is integer number of data points taken for each experiment: the lower the number of data points, the faster the participant for that run. One kind of ouliers is then, the experiments in which a participant takes too long performing an attempt of drawing a specific pattern.
  
 One very simple statistical method to detect outliers is [the interquartile range rule](https://youtu.be/FRlTh5HQORA). The interquartile range shows how the data is spread about the median and it's calculated by substracting the third and the first quatiles -> `IQR = Q3 - Q1`, where the third and first quartiles represent the number from which 75% and 25% of our data falls below. The following plot shows the extreme outliers in red for the lenghts of the time-series for each experiment after purging the data from zero values (blinking values in pupil diameter readings):
  
@@ -93,9 +93,21 @@ One very simple statistical method to detect outliers is [the interquartile rang
   <img width="700" height="400" src=".media/outliers.png">
 </p>
  
+ Another kind of information that could be useful to detect outlier are the max values for the distance metric and the pupil diameter readings. The following plots show the outliers' indices in x and y coordinates of the gaze-movement.
+ 
+ <p align="center">
+  <img width="700" height="400" src=".media/outliers_value.png">
+</p>
+ 
  The dataframe after normalizing all the data by lenght (all experiments stretched to the max lenght after outlier removal) and with the additional features is then:
  
 ![dataframe_post](./.media/dataframe_normal_after_outlier_removal.PNG)
+
+The following are some aditional plots which are pretty useful to get insights about the data and clean it better. They contain all xy readings for a specific participant and an specific pattern ("N": pattern3) and the comparisson between partcipants for xy and pupil-diameter information for the third attempt of "N" pattern. The pupil time-series data has been normalized by lenght only, making all series the same size as the maximium series -> 161 data points.
+
+<p align="center">
+  <img width="900" height="540" src=".media/xy_pupil_compare.png">
+</p>
 
 ## Algorithms Overview
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
