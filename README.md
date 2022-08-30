@@ -113,7 +113,7 @@ The following are the most common approaches for time-series classification. In 
 #### Confusion Matrix
 
 <p align="center">
-  <img width="850" height="370" src=".media/confusion_matrix_LSTM_report.png">
+  <img width="800" height="320" src=".media/confusion_matrix_LSTM_report.png">
 </p>
 
 ## Fine-Tuning
@@ -130,4 +130,3 @@ The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-S
  <a href="https://www.buymeacoffee.com/lavmlk2020B" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height=42 width=160>
   </a>
 </p>
-
