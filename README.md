@@ -39,7 +39,7 @@ The data collection experiment:
 The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
 
 <p align="center">
-  <img width="500" height="500" src="./.media/pattern_flip.gif">
+  <img width="500" height="450" src="./.media/pattern_flip.gif">
 </p>
  
 ### Overview: Pipeline description for classifying time series data
@@ -113,6 +113,10 @@ The following are some aditional plots which are pretty useful to get insights a
   <img width="900" height="540" src=".media/xy_pupil_compare.png">
 </p>
 
+Plots **A** and **C** are respectively the XY coordinates and pupil diameter readings for 7 participants while their third attempt of pattern 3 (N).
+Plots **B** and **D** are respectively the XY coordinates and pupil diameter readings for JUST ONE of the participants while their first 7 attempts of pattern 3 (N).
+Some patterns of the data are already visible when visualizing the data like this. The plots for just one participant are more "uniform" and don't present as much variability as the plots that are comparing participants to each other.
+
 ## Algorithms Overview
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
  - Distance-based approaches
@@ -122,22 +126,11 @@ The following are the most common approaches for time-series classification. In 
  - Interval-based approaches
  - **Deep Learning**: LSTM, CNN_Rocket
 
-## Evaluation
-
-### LSTM
-
-#### Confusion Matrix
-
-<p align="center">
-  <img width="800" height="320" src=".media/confusion_matrix_LSTM_report.png">
-</p>
-
 ## Fine-Tuning
 ### Hyperparameters
 A hyperparameter is a parameter whose value is used to control the learning process. It can be though as configuration variables. Your model parameters are optimized (you could say "tuned") by the training process: you run data through the operations of the model, compare the resulting prediction with the actual value for each data instance, evaluate the accuracy, and adjust until you find the best values. By contrast, hyperparameters are tuned by running your whole training job, looking at the aggregate accuracy, and adjusting. The values of other parameters are learned (like the neural network weights). Hyperparameter optimization or tuning is the problem of choosing a set of optimal hyperparameters for a learning algorithm.
 
 <sup>source: [Google/hyperparameter-tuning-overview](https://cloud.google.com/ai-platform/training/docs/hyperparameter-tuning-overview)</sup>
-
 
 #### For Getting the Data Ready (all models)
 - Normalize by Value: bool: [True, False]
@@ -155,6 +148,18 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 - EarlyStopping and Checkpoints
 
 <sup>check this complete guide fir neural-networks design: (https://hagan.okstate.edu/NNDesign.pdf)</sup>
+
+## Evaluation
+
+### LSTM
+
+#### Confusion Matrix
+
+<p align="center">
+  <img width="800" height="320" src=".media/confusion_matrix_LSTM_report.png">
+</p>
+
+`31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning.
 
 ## License
 
