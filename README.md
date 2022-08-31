@@ -19,6 +19,13 @@
  
 The purpose of this repository is to provide the guidelines and a framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, pipeline was design with scalability to other multivariate time-series classification tasks and other datasets. 
 
+<p align="center">
+  <img width="700" height="390" src=".media/experimental_setup.png">
+</p>
+<p align="center">
+  <sub>source: https://www.tobii.com/group/about/this-is-eye-tracking/
+  </p>
+ 
 The task:
 <p align="center">
 <i><b>"To create a system capable of classifying users by finding an "eye-signature" in eye-tracking data".</b></i>
@@ -32,12 +39,9 @@ The data collection experiment:
 The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
 
 <p align="center">
-  <img width="700" height="390" src=".media/experimental_setup.png">
+  <img width="500" height="500" src="./.media/pattern_flip.gif">
 </p>
-<p align="center">
-  <sub>source: https://www.tobii.com/group/about/this-is-eye-tracking/
-  </p>
-  
+ 
 ### Overview: Pipeline description for classifying time series data
 <sup>source: [IBM/what-is-time-series-classification](https://developer.ibm.com/learningpaths/get-started-time-series-classification-api/what-is-time-series-classification/)</sup>
 
