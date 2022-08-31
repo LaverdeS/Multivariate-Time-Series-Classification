@@ -130,7 +130,27 @@ The following are the most common approaches for time-series classification. In 
 
 ## Fine-Tuning
 ### Hyperparameters
-[list]
+A hyperparameter is a parameter whose value is used to control the learning process. It can be though as configuration variables. Your model parameters are optimized (you could say "tuned") by the training process: you run data through the operations of the model, compare the resulting prediction with the actual value for each data instance, evaluate the accuracy, and adjust until you find the best values. By contrast, hyperparameters are tuned by running your whole training job, looking at the aggregate accuracy, and adjusting. The values of other parameters are learned (like the neural network weights). Hyperparameter optimization or tuning is the problem of choosing a set of optimal hyperparameters for a learning algorithm.
+
+<sup>source: [Google/hyperparameter-tuning-overview](https://cloud.google.com/ai-platform/training/docs/hyperparameter-tuning-overview)</sup>
+
+
+#### For Getting the Data Ready (all models)
+- Normalize by Value: bool: [True, False]
+- Data Splits: work only with latest 5 attempts for each participant or work only with the 5 cleanest attempts
+- Data Cleaning: outliers and preprocessing
+- Feature Selection
+
+#### For Neural Networks
+- Number of Hidden Layers
+- Number of Hidden Units (nodes)
+- Regularization
+- Batch Size
+- Learning Rate
+- Activation Functions
+- EarlyStopping and Checkpoints
+
+<sup>check this complete guide fir neural-networks design: (https://hagan.okstate.edu/NNDesign.pdf)</sup>
 
 ## License
 
