@@ -159,7 +159,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
   <img width="800" height="320" src=".media/confusion_matrix_LSTM_report.png">
 </p>
 
-`31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning.
+`31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning. A binary classifier for each participant is also posible, counting on a small training time, they could be ensembled their predictions aggregated.
 
 ## License
 
