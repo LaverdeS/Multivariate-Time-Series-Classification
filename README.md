@@ -1,6 +1,6 @@
 <h1>
  <p align="center">
-  <img width="300" height="300" src=".media/GazeDefy.png">
+  <img width="300" height="300" src=".media/GazeDefy2.png">
 </p>
  </h1>
 
