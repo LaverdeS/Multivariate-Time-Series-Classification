@@ -121,7 +121,7 @@ Some patterns of the data are already visible when visualizing the data like thi
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
  - Distance-based approaches
  - Shapelet
- - Model Ensembles
+ - Model Ensembles: Desicion Trees and Binary Classifiers
  - Dictionary approaches
  - Interval-based approaches
  - **Deep Learning**: LSTM, CNN_Rocket
