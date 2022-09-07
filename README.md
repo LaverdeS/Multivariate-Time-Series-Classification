@@ -33,7 +33,7 @@ The task:
 
 The data collection experiment: 
 <p align="center">
-<i><b>"Each participant will have to draw each of the 6 patterns 15 times with their gaze movement".</b></i>
+<i><b>"Each participant will have to draw each of the 6 patterns 15 times with their eyes movement (gaze)".</b></i>
 </p>
 
 The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
