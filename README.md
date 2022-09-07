@@ -147,7 +147,9 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 - Activation Functions
 - EarlyStopping and Checkpoints
 
-<sup>check this complete guide fir neural-networks design: (https://hagan.okstate.edu/NNDesign.pdf)</sup>
+<sub>additional link: [check this complete guide for neural-networks design](https://hagan.okstate.edu/NNDesign.pdf)</sub>
+
+<sup>additional link: [batch_size and learning_rate can be auto-tuned with the Tuner class of PyTorch Lightning](https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.tuner.tuning.Tuner.html)</sup>
 
 ## Evaluation
 
