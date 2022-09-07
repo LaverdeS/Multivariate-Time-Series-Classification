@@ -133,6 +133,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 <sup>source: [Google/hyperparameter-tuning-overview](https://cloud.google.com/ai-platform/training/docs/hyperparameter-tuning-overview)</sup>
 
 #### For Getting the Data Ready (all models)
+- Seed Value: for any random process (sampling and weights initialization)
 - Normalize by Value: bool: [True, False]
 - Data Splits: work only with latest 5 attempts for each participant or work only with the 5 cleanest attempts
 - Data Cleaning: outliers and preprocessing
@@ -145,6 +146,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 - Batch Size
 - Learning Rate
 - Activation Functions
+- Weights Initialization
 - EarlyStopping and Checkpoints
 
 <sub>additional link: [check this complete guide for neural-networks design](https://hagan.okstate.edu/NNDesign.pdf)</sub>
