@@ -17,7 +17,7 @@
   </a>
 </p>
  
-The purpose of this repository is to provide the guidelines and a framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, pipeline was design with scalability to other multivariate time-series classification tasks and other datasets. 
+The purpose of this repository is to provide the guidelines and a framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, the pipeline was designed with scalability to other multivariate time-series classification tasks and other datasets. 
 
 <p align="center">
   <img width="700" height="390" src=".media/experimental_setup.png">
