@@ -43,8 +43,12 @@ def show_confusion_matrix(confusion_matrix):
     plt.xlabel('Predicted User')
 
 
-def argparse():
-    pass
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--model", help="model selection")
+    parser.add_argument("-o", "--classifier_mode", help="classifier mode selection")
+    parser.add_argument("-f", "--normalization", help="normalization mode selection")
+    return parser.parse_args()
 
 
 if __name__ == '__main__':
