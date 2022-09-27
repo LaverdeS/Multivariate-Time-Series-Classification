@@ -39,9 +39,10 @@ The data collection experiment:
 The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
 
 <p align="center">
-  <img width="500" height="450" src="./.media/pattern_flip.gif">
+  <img width="500" height="450" src="https://user-images.githubusercontent.com/38184042/192492603-569f6036-f1a1-48a2-9814-7c251d173558.gif">
 </p>
- 
+
+
 ### Overview: Pipeline description for classifying time series data
 <sup>source: [IBM/what-is-time-series-classification](https://developer.ibm.com/learningpaths/get-started-time-series-classification-api/what-is-time-series-classification/)</sup>
 
