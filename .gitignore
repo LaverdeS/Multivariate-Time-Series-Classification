@@ -131,3 +131,5 @@ dmypy.json
 .media/logo_design.pptx
 checkpoints/
 logs/
+.outputs/
+.media/confusion_matrix_LSTM_Zpattern_halftrained.PNG
