@@ -161,7 +161,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 #### Confusion Matrix
 
 <p align="center">
-  <img width="800" height="320" src=".media/EDA/confusion_matrix_LSTM_report.png">
+  <img width="800" height="320" src=".media/LSTM/confusion_matrix_LSTM_report.png">
 </p>
 
 `31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning. A binary classifier for each participant is also posible, counting on a small training time, they could be ensembled their predictions aggregated.
@@ -178,6 +178,8 @@ This is how the model uses the featural information to produce its outout, and r
 <p align="center">
   <img width="500" height="450" src="https://user-images.githubusercontent.com/38184042/191922853-6db5e2eb-3355-4055-afb7-c07677674b3d.gif">
 </p>
+
+The model's output can be understood as the final state the model reaches where the final decision is taken. That's the reason why all the label paths coverge to the same final state. In this moment the model checks the values of each output neuron (one neuron per participant) and get's the maximum value between all of them. The values of the neurons are not well represented in the graph, so for interpretation the values of the x-axis are better when ignored.
 
 ## License
 
