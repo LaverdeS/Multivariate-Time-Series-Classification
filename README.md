@@ -173,7 +173,7 @@ The following plots show each of the features impact on the model's predictions 
   <img width="650" height="650" src=".outputs/LSTM/pattern_agnostic/feature_importance/shap_7features.PNG">
 </p>
 
-This is how the model uses the featural information to reach a decision.
+This is how the model uses the featural information to produce its outout, and represents the weight or importance of each feature for a single test sample prediction. The ouput values are in the form of `logits`. The spaced-line corresponds to the decision path for the final model decision (participants_id)
 
 <p align="center">
   <img width="500" height="450" src="https://user-images.githubusercontent.com/38184042/191922853-6db5e2eb-3355-4055-afb7-c07677674b3d.gif">
