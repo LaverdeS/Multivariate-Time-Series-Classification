@@ -82,36 +82,36 @@ In total, 30 people participated in the test (data collection) but for the sake 
  
 Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments. The data is presented with float resolution of 3 decimals as an approximation and a hyperparameter. The data with *float_resolution = 3*:
 
-![dataframe](./.media/original_dataframe.PNG)
+![dataframe](./.media/EDA/original_dataframe.PNG)
  
 One important part of analysing the data is to consider adding more features to the data so is more rich. More features in general means that the algorithm would have more information to find a patterns assosiated with the target label, which is the participant_name in our case; however, some features could be misleading for the classifier forcing to fit into noise and making it hardly optimal predicting the label of unseen data.
  
 In this case, the difference between the gaze-shift or eye-movement drawing a pattern and the ideal pattern description is added as an extra feature and called ts_distance. The details of how this metric is calculated can be found in the notebook called `DistanceAnalysis.ipynb`. The following plots show all the ts_distance calculations for participant5 + pattern4 and participant7 + pattern2:
  
-![distance](./.media/distance_samples.png)
+![distance](./.media/EDA/distance_samples.png)
  
 Here we can clearly see that the experiments present variability in lenght and in value of the readings | calculations. Some experiments can be abnomaly long or posses values that are absurdly high. An outlier is a data point that lies outside the overall pattern in a distribution. These **outliers** of the data should be detected and removed from the data that is going to be fed to a classifier. Consequently, another feature related to the speed in which a parcipant succesfully draws a pattern is added to the data. This feature is called the series_original_lenght and it is integer number of data points taken for each experiment: the lower the number of data points, the faster the participant for that run. One kind of ouliers is then, the experiments in which a participant takes too long performing an attempt of drawing a specific pattern.
  
 One very simple statistical method to detect outliers is [the interquartile range rule](https://youtu.be/FRlTh5HQORA). The interquartile range shows how the data is spread about the median and it's calculated by substracting the third and the first quatiles -> `IQR = Q3 - Q1`, where the third and first quartiles represent the number from which 75% and 25% of our data falls below. The following plot shows the extreme outliers in red for the lenghts of the time-series for each experiment after purging the data from zero values (blinking values in pupil diameter readings):
  
 <p align="center">
-  <img width="700" height="400" src=".media/outliers.png">
+  <img width="700" height="400" src=".media/EDA/outliers.png">
 </p>
  
  Another kind of information that could be useful to detect outlier are the max values for the distance metric and the pupil diameter readings. The following plots show the outliers' indices in x and y coordinates of the gaze-movement.
  
  <p align="center">
-  <img width="700" height="570" src=".media/outliers_value.png">
+  <img width="700" height="570" src=".media/EDA/outliers_value.png">
 </p>
  
  The dataframe after normalizing all the data by lenght (all experiments stretched to the max lenght after outlier removal) and with the additional features is then:
  
-![dataframe_post](./.media/dataframe_normal_after_outlier_removal.PNG)
+![dataframe_post](./.media/EDA/dataframe_normal_after_outlier_removal.PNG)
 
 The following are some aditional plots which are pretty useful to get insights about the data and clean it better. They contain all xy readings for a specific participant and an specific pattern ("N": pattern3) and the comparisson between partcipants for xy and pupil-diameter information for the third attempt of "N" pattern. The pupil time-series data has been normalized by lenght only, making all series the same size as the maximium series -> 161 data points.
 
 <p align="center">
-  <img width="900" height="540" src=".media/xy_pupil_compare.png">
+  <img width="900" height="540" src=".media/EDA/xy_pupil_compare.png">
 </p>
 
 Plots **A** and **C** are respectively the XY coordinates and pupil diameter readings for 7 participants while their third attempt of pattern 3 (N).
@@ -161,7 +161,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 #### Confusion Matrix
 
 <p align="center">
-  <img width="800" height="320" src=".media/confusion_matrix_LSTM_report.png">
+  <img width="800" height="320" src=".media/EDA/confusion_matrix_LSTM_report.png">
 </p>
 
 `31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning. A binary classifier for each participant is also posible, counting on a small training time, they could be ensembled their predictions aggregated.
