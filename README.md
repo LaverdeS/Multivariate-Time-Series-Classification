@@ -108,7 +108,7 @@ One very simple statistical method to detect outliers is [the interquartile rang
  
 ![dataframe_post](./.media/EDA/dataframe_normal_after_outlier_removal.PNG)
 
-The following are some aditional plots which are pretty useful to get insights about the data and clean it better. They contain all xy readings for a specific participant and an specific pattern ("N": pattern3) and the comparisson between partcipants for xy and pupil-diameter information for the third attempt of "N" pattern. The pupil time-series data has been normalized by lenght only, making all series the same size as the maximium series -> 161 data points.
+The following are some aditional plots which are pretty useful to get insights about the data and clean it better. They contain all xy readings for a specific participant and an specific pattern ("N": pattern3) and the comparisson between partcipants for xy and pupil-diameter information for the third attempt of "N" pattern. The pupil time-series data has been normalized by lenght only, making all series the same size as the maximium series -> 161 data points. The pattern plot figures are inverted under the x-axis for simplicity of analysis.
 
 <p align="center">
   <img width="900" height="540" src=".media/EDA/xy_pupil_compare.png">
