@@ -166,6 +166,12 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 
 `31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning. A binary classifier for each participant is also posible, counting on a small training time, they could be ensembled their predictions aggregated.
 
+<p align="center">
+  <img width="800" height="320" src=".media/LSTM/latest_report.PNG">
+</p>
+
+`28.09.2022:` Model trained for 900 iterations, using approximatelly 900K parameters and is *pattern agnostic*. The model performance has improved due to standarization by value and outlier removal. All features were considered including the speed. This model is smaller but the data is richer and with more pre-processing | cleaning. The training procedure has an EarlyStopping criteria that will conclude the training once the validation accuracy does not increase for over the last 500 iterations of training data. Further fine-tuning is possible and more data and extra pre-processing procedures are available. The analysis of the features importance for the model's predictions against test data can be found on the next section. 
+
 #### Feature Importance and Model's Predictions Explaination
 The following plots show each of the features impact on the model's predictions against test data (unseen samples). The model was trained for multiclass classification with 6 participants as the labels. The pattern_id is an additional feature, wether in int form or in one-hot-encoding
 
