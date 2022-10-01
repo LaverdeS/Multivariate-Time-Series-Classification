@@ -138,7 +138,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 - Normalize by Value: bool: [True, False]
 - Data Splits: work only with latest 5 attempts for each participant or work only with the 5 cleanest attempts
 - Data Cleaning: outliers and preprocessing
-- Feature Selection
+- Feature Selection: Dimensionality Reduction and trained-model feature importance.
 
 #### For Neural Networks
 - Number of Hidden Layers
