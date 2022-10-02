@@ -54,7 +54,8 @@ Python version 3.7 or superior is strongly recommended. The requirements can be 
 ```
 
 ## How to use this repository?
-Some sample data can be found inside the `.data` folder and the original plots of the data inside `.media`. The folowing is a short description of each of the `*.py` files inside this repository:
+
+The most stable pipelines for both exploring the data and building | training the model are found under the [notebooks](./notebooks/): [Hierachical Multivariate TimeSeries Classification](./notebooks/Hierachical_Multivariate_TimeSeries_Classification.ipynb) and [Time Series Exploratoy Data Analysis](./notebooks/Time_Series_EDA.ipynb). Some sample data can be found inside the `.data` folder and the original plots of the data inside `.media`. The folowing is a short description of each of the `*.py` files inside this repository:
 
 - `aggregator.py`: Every single experiment's output signals for a single user drawing one pattern is originally stored on a separate `*.txt` file.  This script reads and aggregates each single file inside a parcipant's data-folder into a single file with the structure:
 
