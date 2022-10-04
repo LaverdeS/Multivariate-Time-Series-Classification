@@ -127,6 +127,8 @@ The following are the most common approaches for time-series classification. In 
  - Dictionary approaches
  - Interval-based approaches
  - **Deep Learning**: LSTM (implemented), CNN_Rocket (implemented)
+ - 
+<sup>minirocket source: https://github.com/angus924/minirocket</sup>
 
 ## Fine-Tuning
 ### Hyperparameters
