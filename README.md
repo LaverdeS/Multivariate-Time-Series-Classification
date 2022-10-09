@@ -192,6 +192,12 @@ This is how the model uses the featural information to produce its outout, and r
 
 The model's output can be understood as the final state the model reaches where the final decision is taken. That's the reason why all the label paths coverge to the same final state. In this moment the model checks the values of each output neuron (one neuron per participant) and get's the maximum value between all of them. The values of the neurons are not well represented in the graph, so for interpretation the values of the x-axis are better when ignored.
 
+### CNN: Rocket
+
+#### Confusion Matrix
+
+`10.09.2022:`
+
 ## License
 
 The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/blob/main/LICENSE): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. If you find this repository useful and want to suppot the author, you can [Buy Me a Coffe!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)
