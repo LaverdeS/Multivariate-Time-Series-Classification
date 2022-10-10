@@ -198,6 +198,16 @@ The model's output can be understood as the final state the model reaches where 
 
 `10.09.2022:`
 
+<p align="center">
+  <img width="500" height="320" src=".media/CNN/minRocketNN_confusion_matrix.PNG">
+</p>
+
+<p align="center">
+  <img width="500" height="320" src=".media/CNN/minRocketNN_classification_report.PNG">
+</p>
+
+
+
 ## License
 
 The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/blob/main/LICENSE): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. If you find this repository useful and want to suppot the author, you can [Buy Me a Coffe!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)
