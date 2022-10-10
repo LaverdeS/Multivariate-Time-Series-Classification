@@ -196,7 +196,7 @@ The model's output can be understood as the final state the model reaches where 
 
 #### Confusion Matrix
 
-`10.09.2022:`
+`10.09.2022:` Sampling is not stratified.
 
 <p align="center">
   <img width="500" height="320" src=".media/CNN/minRocketNN_confusion_matrix.PNG">
