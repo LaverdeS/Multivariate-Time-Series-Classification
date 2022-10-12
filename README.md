@@ -206,7 +206,11 @@ The model's output can be understood as the final state the model reaches where 
   <img width="475" height="320" src=".media/CNN/minRocketNN_classification_report.PNG">
 </p>
 
+## Best Models
 
+<p align="center">
+  <img width="1000" height="300" src=".outputs/best_models.png">
+</p>
 
 ## License
 
