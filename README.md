@@ -212,6 +212,15 @@ The model's output can be understood as the final state the model reaches where 
   <img width="1100" height="280" src=".outputs/best_models.png">
 </p>
 
+`Accuracy`: Overall, how often is the classifier correct?
+
+`Precision`: When it predicts yes, how often is it correct?
+
+`Recall`: When it’s actually yes, how often does it predict yes?
+
+`F1-Score`: Harmonic mean of the precision and recall
+
+
 ## License
 
 The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/blob/main/LICENSE): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. If you find this repository useful and want to suppot the author, you can [Buy Me a Coffe!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)
