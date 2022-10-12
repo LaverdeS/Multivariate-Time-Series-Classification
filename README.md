@@ -212,6 +212,10 @@ The model's output can be understood as the final state the model reaches where 
   <img width="1100" height="280" src=".outputs/best_models.png">
 </p>
 
+#### Classification Metrics
+
+For security-related applications, the false positives are the cases most urgently to be avoid. This means the precision metric should be the most important to consider.
+
 `Accuracy`: Overall, how often is the classifier correct?
 
 `Precision`: When it predicts yes, how often is it correct?
