@@ -209,7 +209,7 @@ The model's output can be understood as the final state the model reaches where 
 ## Best Models
 
 <p align="center">
-  <img width="1000" height="300" src=".outputs/best_models.png">
+  <img width="1100" height="280" src=".outputs/best_models.png">
 </p>
 
 ## License
