@@ -196,7 +196,7 @@ The model's output can be understood as the final state the model reaches where 
 
 #### Confusion Matrix
 
-`10.09.2022:` Sampling is not stratified. RocketNN is an exceptionally fast and accurate time series classification algorithm using random convolutional kernels.
+`10.09.2022:` Sampling is not stratified. RocketNN is an exceptionally fast and accurate time series classification algorithm using random convolutional kernels. Even though the model shows high convergence, its performance can be tuned further.
 
 <p align="center">
   <img width="475" height="320" src=".media/CNN/minRocketNN_confusion_matrix.PNG">
