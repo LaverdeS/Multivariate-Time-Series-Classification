@@ -123,7 +123,7 @@ Some patterns of the data are already visible when visualizing the data like thi
 The following are the most common approaches for time-series classification. In **bold**: currently available models.
  - Distance-based approaches
  - Shapelet
- - Model Ensembles: Desicion Trees and Binary Classifiers
+ - Model Ensembles: Decision Trees and Binary Classifiers
  - Dictionary approaches
  - Interval-based approaches
  - **Deep Learning**: LSTM (implemented), CNN_Rocket (implemented)
@@ -214,8 +214,7 @@ The model's output can be understood as the final state the model reaches where 
 
 #### Classification Metrics
 
-For security-related applications, the false positives are the cases most urgently to be avoid. This means the precision metric should be the most important to consider.
-
+For security-related applications, the false positives are the cases most urgently to be avoid. This means the precision metric should be the most important to consider. The current best classifier can be used as an additional step in authetication protocol to unlock a device or give access to certain network for instance.
 `Accuracy`: Overall, how often is the classifier correct?
 
 `Precision`: When it predicts yes, how often is it correct?
