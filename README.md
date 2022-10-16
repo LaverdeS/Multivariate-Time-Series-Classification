@@ -214,7 +214,8 @@ The model's output can be understood as the final state the model reaches where 
 
 #### Classification Metrics
 
-For security-related applications, the false positives are the cases most urgently to be avoid. This means the precision metric should be the most important to consider. The current best classifier can be used as an additional step in authetication protocol to unlock a device or give access to certain network for instance.
+For security-related applications, the false positives are the cases most urgently to be avoid. This means the precision metric should be the most important to consider. The current best classifier can be used as an additional step in an authetication protocol to unlock a device or to give access to certain network for instance.
+
 `Accuracy`: Overall, how often is the classifier correct?
 
 `Precision`: When it predicts yes, how often is it correct?
@@ -222,7 +223,6 @@ For security-related applications, the false positives are the cases most urgent
 `Recall`: When it’s actually yes, how often does it predict yes?
 
 `F1-Score`: Harmonic mean of the precision and recall
-
 
 ## License
 
