@@ -17,7 +17,7 @@
   </a>
 </p>
  
-The purpose of this repository is to provide the guidelines and a framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, the pipeline was designed with scalability to other multivariate time-series classification tasks and other datasets. 
+The purpose of this repository is to provide the guidelines and a customizable framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, the pipeline was designed with scalability to other multivariate time-series classification tasks and other datasets. 
 
 <p align="center">
   <img width="700" height="390" src=".media/experimental_setup.png">
@@ -36,7 +36,7 @@ The data collection experiment:
 <i><b>"Each participant will have to draw each of the 6 patterns 15 times with their eyes movement (gaze)".</b></i>
 </p>
 
-The 6 patterns are composed by 3 lines each. The form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
+The 6 patterns are composed by 3 lines each. They form shapes such as 'Z', 'N', 'U'. If Such a system could be used for security applications for instance. The "eye-signature" would be the PIN to identify a person and grant access.
 
 <p align="center">
   <img width="500" height="450" src="https://user-images.githubusercontent.com/38184042/192492603-569f6036-f1a1-48a2-9814-7c251d173558.gif">
