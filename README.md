@@ -126,7 +126,7 @@ The following are the most common approaches for time-series classification. In 
  - Model Ensembles: Decision Trees and Binary Classifiers
  - Dictionary approaches
  - Interval-based approaches
- - **Deep Learning**: LSTM (implemented), CNN_Rocket (implemented)
+ - **Deep Learning**: LSTM (implemented), CNN_Rocket (implemented), Transformers (pending)
  
 <sup>minirocket source: https://github.com/angus924/minirocket</sup>
 
