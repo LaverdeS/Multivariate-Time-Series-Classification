@@ -212,6 +212,10 @@ The model's output can be understood as the final state the model reaches where 
   <img width="1100" height="250" src=".outputs/best_models.png">
 </p>
 
+Sequential models such as LSTMs the model nerons learn to predict the outcome of a layer using memory cells and recurrent conections. They transmit information NOT only in one direction. The informations is remembered through time so they are ideal for time-series prediction (text and our case), but they don't extract spatial relationships.
+
+Convolutional models such as CNNs --> ROCKET, use convolutional kernels or feature maps to extract additional information from the input, they extract spatial relationships that's why the work well with images.
+
 #### Classification Metrics
 
 For security-related applications, the false positives are the cases most urgently to be avoid. This means the precision metric should be the most important to consider. The current best classifier can be used as an additional step in an authetication protocol to unlock a device or to give access to certain network for instance.
