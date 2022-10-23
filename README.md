@@ -219,7 +219,8 @@ Convolutional models such as CNNs --> ROCKET, use convolutional kernels or featu
 HIVE-COTE (ensemble), CIF, InceptionTime and DTW_D are other models which are considered among the best in current research and are to be evaluated. Ideally the best models will be tuned to their best performance and ensembled to provide an always perfect predictions of the user. (opc) The final models are to be trained with the totality of the data (30 participants), tuned and ensembled in the same way.
 
 <sub>TSC models comparison link: [The great multivariate time series classification bake off](https://link.springer.com/article/10.1007/s10618-020-00727-3)</sub>
-<sup>...using sktime and sktime-dl</sup>
+
+<sup>model-hub can be accessed from sktime and sktime-dl...</sup>
 
 #### Classification Metrics
 
