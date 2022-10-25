@@ -220,7 +220,7 @@ HIVE-COTE (ensemble), CIF, InceptionTime and DTW_D are other models which are co
 
 <sub>TSC models comparison link: [The great multivariate time series classification bake off](https://link.springer.com/article/10.1007/s10618-020-00727-3)</sub>
 
-<sup>model-hub can be accessed from sktime and sktime-dl...</sup>
+<sup>model-hub can be accessed from sktime and sktime-dl (ported over to sktime)</sup>
 
 #### Classification Metrics
 
