@@ -234,6 +234,11 @@ For security-related applications, the false positives are the cases most urgent
 
 `F1-Score`: Harmonic mean of the precision and recall
 
+## Addional Data | Experiments
+
+- Arousal level by pupil diameter changes when observing images fromt the opposite gender: Predict the rating.
+- Secret Pattern Classifier. Each participant memorizes one pattern only (secret) and the systems predicts it.
+
 ## License
 
 The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/blob/main/LICENSE): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. If you find this repository useful and want to suppot the author, you can [Buy Me a Coffe!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)
