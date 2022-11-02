@@ -236,8 +236,8 @@ For security-related applications, the false positives are the cases most urgent
 
 ## Addional Data | Experiments
 
-- Arousal level by pupil diameter changes when observing images fromt the opposite gender: Predict the rating.
-- Secret Pattern Classifier. Each participant memorizes one pattern only (secret) and the systems predicts it.
+- Arousal level by pupil diameter changes when observing images from the opposite gender: Predict the rating the user would give to the image.
+- Secret Pattern Classifier: Each participant memorizes one pattern only (secret) and the system predicts it.
 
 ## License
 
