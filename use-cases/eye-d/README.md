@@ -96,7 +96,7 @@ Here we can clearly see that the experiments present variability in lenght and i
 One very simple statistical method to detect outliers is [the interquartile range rule](https://youtu.be/FRlTh5HQORA). The interquartile range shows how the data is spread about the median and it's calculated by substracting the third and the first quatiles -> `IQR = Q3 - Q1`, where the third and first quartiles represent the number from which 75% and 25% of our data falls below. The following plot shows the extreme outliers in red for the lenghts of the time-series for each experiment after purging the data from zero values (blinking values in pupil diameter readings):
  
 <p align="center">
-  <img width="700" height="400" src=media/EDA/outliers.png">
+  <img width="700" height="400" src="media/EDA/outliers.png">
 </p>
  
  Another kind of information that could be useful to detect outliers is the max values for the distance metric and the pupil diameter readings. The following plots show the outliers' indices in x and y coordinates of the gaze-movement.
