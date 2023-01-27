@@ -1,6 +1,10 @@
-<h1 align="center">
- Multivariate-Time-Series-Classification
-</h1>
+<h3 align="center">
+  <img
+    src="https://user-images.githubusercontent.com/38184042/215089990-e4d34345-46f8-4280-ba39-42e13b19a9f1.png"
+    height="200"
+  >
+</h3>
+
 <div align="center">
 
   <a href="https://github.com/Unstructured-IO/unstructured/blob/main/LICENSE.md">![https://pypi.python.org/pypi/unstructured/](https://img.shields.io/pypi/l/unstructured.svg)</a>
@@ -9,6 +13,11 @@
   <a href="https://pypi.python.org/pypi/unstructured/">![https://github.com/Naereen/badges/](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)</a>
 
 </div>
+
+<h1 align="center">
+ Multivariate-Time-Series-Classification
+</h1>
+
 The purpose of this repo is to provide the tools for time-series data analysis and data preparation pipelines for machine learning applications and research with eye-tracking data: gaze and pupil dilation. The initial processing and transformation blocks enhance the researcher for rapid-prototyping data applications and first hand data cleaning and visualization. 
 
 ## :coffee: Getting Started
