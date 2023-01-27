@@ -8,7 +8,7 @@
 ### *Time-Series Explorations* Interactive App
 The following web application demonstrates how to use this repository tools for rapid and interactively explore and clean, prepare and visualize your data, and to train a ROCKET model for univariate time-series classification.
 
-[![App](https://user-images.githubusercontent.com/38184042/215069730-60f0b0cf-fd96-4a73-9bd1-7ed6c8478dbe.png)](https://laverdes-ts-explorations.hf.space)
+[![App](https://user-images.githubusercontent.com/38184042/215069730-60f0b0cf-fd96-4a73-9bd1-7ed6c8478dbe.png)](https://huggingface.co/spaces/laverdes/ts-explorations)
 
 ### Time-Series Classification
 Building upon the recent success of convolutional neural networks for time-series classification, we applied
