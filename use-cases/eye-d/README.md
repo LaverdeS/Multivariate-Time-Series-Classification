@@ -1,6 +1,6 @@
 <h1>
  <p align="center">
-  <img width="300" height="300" src=".media/GazeDefy3.png">
+  <img width="300" height="300" src="media/GazeDefy3.png">
 </p>
  </h1>
 
@@ -20,7 +20,7 @@
 The purpose of this repository is to provide the guidelines and a customizable framework for time-series exploration and classification using eye-tracking data: **gaze shift** and **pupil diameter changes**. Even though the presented results are particular to the experimental setup, the pipeline was designed with scalability to other multivariate time-series classification tasks and other datasets. 
 
 <p align="center">
-  <img width="700" height="390" src=".media/experimental_setup.png">
+  <img width="700" height="390" src="media/experimental_setup.png">
 </p>
 <p align="center">
   <sub>source: https://www.tobii.com/group/about/this-is-eye-tracking/
@@ -55,7 +55,7 @@ Python version 3.7 or superior is strongly recommended. The requirements can be 
 
 ## How to use this repository?
 
-The most stable pipelines for both exploring the data and building | training the model are found under the [notebooks](./notebooks/): [Hierachical Multivariate TimeSeries Classification](./notebooks/Hierachical_Multivariate_TimeSeries_Classification.ipynb) and [Time Series Exploratoy Data Analysis](./notebooks/Time_Series_EDA.ipynb). Some sample data can be found inside the `.data` folder and the original plots of the data inside `.media`. The folowing is a short description of each of the `*.py` files inside this repository:
+The most stable pipelines for both exploring the data and building | training the model are found under the [notebooks](./notebooks/): [Hierachical Multivariate TimeSeries Classification](./notebooks/Hierachical_Multivariate_TimeSeries_Classification.ipynb) and [Time Series Exploratoy Data Analysis](./notebooks/Time_Series_EDA.ipynb). Some sample data can be found inside the `.data` folder and the original plots of the data inside `media`. The folowing is a short description of each of the `*.py` files inside this repository:
 
 - `aggregator.py`: Every single experiment's output signals for a single user drawing one pattern is originally stored on a separate `*.txt` file.  This script reads and aggregates each single file inside a parcipant's data-folder into a single file with the structure:
 
@@ -83,36 +83,36 @@ In total, 30 people participated in the test (data collection) but for the sake 
  
 Originally, the data is composed by time-series gaze-shift and pupil-diameter readings which are the output of the eye-tracking device during the experiments. The data is presented with float resolution of 3 decimals as an approximation and a hyperparameter. The data with *float_resolution = 3*:
 
-![dataframe](./.media/EDA/original_dataframe.PNG)
+![dataframe](./media/EDA/original_dataframe.PNG)
  
 One important part of analysing the data is to consider adding more features to the data so is more rich. More features in general means that the algorithm would have more information to find a patterns assosiated with the target label, which is the participant_name in our case; however, some features could be misleading for the classifier forcing to fit into noise and making it hardly optimal predicting the label of unseen data.
  
 In this case, the difference between the gaze-shift or eye-movement drawing a pattern and the ideal pattern description is added as an extra feature and called ts_distance. The details of how this metric is calculated can be found in the notebook called `DistanceAnalysis.ipynb`. The following plots show all the ts_distance calculations for participant5 + pattern4 and participant7 + pattern2:
  
-![distance](./.media/EDA/distance_samples.png)
+![distance](./media/EDA/distance_samples.png)
  
 Here we can clearly see that the experiments present variability in lenght and in value of the readings | calculations. Some experiments can be abnomaly long or posses values that are absurdly high. An outlier is a data point that lies outside the overall pattern in a distribution. These **outliers** of the data should be detected and removed from the data that is going to be fed to a classifier. Consequently, another feature related to the speed in which a parcipant succesfully draws a pattern is added to the data. This feature is called the series_original_lenght and it is integer number of data points taken for each experiment: the lower the number of data points, the faster the participant for that run. One kind of ouliers is then, the experiments in which a participant takes too long performing an attempt of drawing a specific pattern.
  
 One very simple statistical method to detect outliers is [the interquartile range rule](https://youtu.be/FRlTh5HQORA). The interquartile range shows how the data is spread about the median and it's calculated by substracting the third and the first quatiles -> `IQR = Q3 - Q1`, where the third and first quartiles represent the number from which 75% and 25% of our data falls below. The following plot shows the extreme outliers in red for the lenghts of the time-series for each experiment after purging the data from zero values (blinking values in pupil diameter readings):
  
 <p align="center">
-  <img width="700" height="400" src=".media/EDA/outliers.png">
+  <img width="700" height="400" src=.media/EDA/outliers.png">
 </p>
  
  Another kind of information that could be useful to detect outlier are the max values for the distance metric and the pupil diameter readings. The following plots show the outliers' indices in x and y coordinates of the gaze-movement.
  
  <p align="center">
-  <img width="700" height="570" src=".media/EDA/outliers_value.png">
+  <img width="700" height="570" src="media/EDA/outliers_value.png">
 </p>
  
  The dataframe after normalizing all the data by lenght (all experiments stretched to the max lenght after outlier removal) and with the additional features is then:
  
-![dataframe_post](./.media/EDA/dataframe_normal_after_outlier_removal.PNG)
+![dataframe_post](./media/EDA/dataframe_normal_after_outlier_removal.PNG)
 
 The following are some aditional plots which are pretty useful to get insights about the data and clean it better. They contain all xy readings for a specific participant and an specific pattern ("N": pattern3) and the comparisson between partcipants for xy and pupil-diameter information for the third attempt of "N" pattern. The pupil time-series data has been normalized by lenght only, making all series the same size as the maximium series -> 161 data points. The pattern plot figures are inverted under the x-axis for simplicity of analysis.
 
 <p align="center">
-  <img width="900" height="540" src=".media/EDA/xy_pupil_compare.png">
+  <img width="900" height="540" src="media/EDA/xy_pupil_compare.png">
 </p>
 
 Plots **A** and **C** are respectively the XY coordinates and pupil diameter readings for 7 participants while their third attempt of pattern 3 (N).
@@ -166,7 +166,7 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 `31.08.2022:` This LSTM model was trained for 1200 iterations, using aproximatelly 1.3 million parameters and is *pattern agnostic*. This is just one trial without doing hyperparameter tuning and without value normalization of the time-series data. The training procedure was done considering all posible features except the velocity. The classifier shows good signs of learning. A binary classifier for each participant is also posible, counting on a small training time, they could be ensembled their predictions aggregated.
 
 <p align="center">
-  <img width="800" height="320" src=".media/LSTM/confusion_matrix_LSTM_report.png">
+  <img width="800" height="320" src="media/LSTM/confusion_matrix_LSTM_report.png">
 </p>
 
 ---
@@ -174,14 +174,14 @@ A hyperparameter is a parameter whose value is used to control the learning proc
 `28.09.2022:` Model trained for 900 iterations, using approximatelly 900K parameters and is *pattern agnostic*. The model performance has improved due to standarization by value and outlier removal. All features were considered including the speed. This model is smaller but the data is richer and with more pre-processing | cleaning. The training procedure has an EarlyStopping criteria that will conclude the training once the validation accuracy does not increase for over the last 500 iterations of training data. Further fine-tuning is possible and more data and extra pre-processing procedures are available. The analysis of the features importance for the model's predictions against test data can be found on the next section. 
 
 <p align="center">
-  <img width="800" height="320" src=".outputs/LSTM/pattern_agnostic/feature_importance/latest_report.png">
+  <img width="800" height="320" src="media/LSTM/latest_report.png">
 </p>
 
 #### Feature Importance and Model's Predictions Explaination
 The following plots show each of the features impact on the model's predictions against test data (unseen samples). The model was trained for multiclass classification with 6 participants as the labels. The pattern_id is an additional feature, wether in int form or in one-hot-encoding
 
 <p align="center">
-  <img width="650" height="650" src=".outputs/LSTM/pattern_agnostic/feature_importance/shap_7features.PNG">
+  <img width="650" height="650" src="media/LSTM/shap_7features.PNG">
 </p>
 
 This is how the model uses the featural information to produce its outout, and represents the weight or importance of each feature for a single test sample prediction. The ouput values are in the form of `logits`. The spaced-line corresponds to the decision path for the final model decision (participants_id)
@@ -199,17 +199,17 @@ The model's output can be understood as the final state the model reaches where 
 `10.09.2022:` Sampling is not stratified. RocketNN is an exceptionally fast and accurate time series classification algorithm using random convolutional kernels. Even though the model shows high convergence, its performance can be tuned further.
 
 <p align="center">
-  <img width="475" height="320" src=".media/CNN/minRocketNN_confusion_matrix.PNG">
+  <img width="475" height="320" src="media/CNN/minRocketNN_confusion_matrix.PNG">
 </p>
 
 <p align="center">
-  <img width="475" height="320" src=".media/CNN/minRocketNN_classification_report.PNG">
+  <img width="475" height="320" src="media/CNN/minRocketNN_classification_report.PNG">
 </p>
 
 ## Best Models
 
 <p align="center">
-  <img width="1100" height="250" src=".outputs/best_models.png">
+  <img width="1100" height="250" src="media/best_models.png">
 </p>
 
 Sequential models such as LSTMs the model nerons learn to predict the outcome of a layer using memory cells and recurrent conections. They transmit information NOT only in one direction. The informations is remembered through time so they are ideal for time-series prediction (text and our case), but they don't extract spatial relationships.
