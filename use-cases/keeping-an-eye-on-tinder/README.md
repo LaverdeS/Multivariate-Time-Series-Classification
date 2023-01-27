@@ -11,12 +11,4 @@ The following web application demonstrates how to use this repository tools for 
 [![App](https://user-images.githubusercontent.com/38184042/215069730-60f0b0cf-fd96-4a73-9bd1-7ed6c8478dbe.png)](https://huggingface.co/spaces/laverdes/ts-explorations)
 
 ### Time-Series Classification
-Building upon the recent success of convolutional neural networks for time-series classification, we applied
-the state-of-the-art ROCKET model (Random Convolutional Kernel Transform) which features a high
-classification accuracy by transforming time series on basis of random convolutional kernels and training a
-simple linear classifier [22]. Data was split using Stratisfied Kfold (k=5) to ensure a balanced proportion of the
-labels, resulting in 102 samples to train ROCKET and 26 to test it (13 for each label). Given the small data
-sets we selected the evaluation strategy LOO (LeaveOneOut) built in a Ridge Classifier. This allows for a
-more complex analysis of how the model would perform when trained on unseen data including small
-variations. Training was carried out five times with random sets to capture the best model (25 models trained
-in total).
+🚧
