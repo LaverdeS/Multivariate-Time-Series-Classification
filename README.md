@@ -25,7 +25,12 @@ You can run this [Colab notebook](url) to run the examples below.
 See the [documentation](https://unstructured-io.github.io/unstructured) for a full description
 of the features in the library.
 
-### Tools / Blocks
+### 🛠️ Tools / Blocks
+
+## 💼 Use Cases
+The following examples are using the tools provided by this repository and can be foundational for similar kind of work.
+- [Keeping an Eye on Tinder: ](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/keeping-an-eye-on-tinder) Towards Automated Detection of Partner Selection via Pupillary Data from Eye-tracker and Smartphone Cameras
+- [Eye-D:](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/eye-d) Identifying Users by their Gaze and Pupil Diameter Data while Drawing Patterns
 
 ## :books: Learn more
 
