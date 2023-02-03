@@ -1,93 +1,63 @@
-import numpy as np
+import logging
+import pathlib
+import json
+import pandas as pd
 
 
-def print_bold(text): print(f"\033[1m {text} \033[0m")
+logging.basicConfig(level=logging.INFO)
 
 
-def normalize(l, verbose=False):
-    l = (l - np.mean(l)) / np.std(l)
-    l = [i.tolist() for i in l]
-    if verbose:
-        print("max: ", max(l))
-        print("mean: ", np.mean(l))
-        print("std: ", np.std(l))
-    return l
+def json_data_to_dataframe(path:str='.'):
+    """Read all json files from path and returns a DataFrame"""
 
+    logging.info(f"number of files: {len(list(pathlib.Path().glob('*.json')))}")
+    logging.info(f"building base dataframe...\n")
+    data_dict = dict()
 
-def normalize_lenghts(l, verbose=False, max_lenght=0):
-    """l is a list of lists"""
-    if max_lenght == 0:
-        max_lenght = max_listoflists_lenght(l, verbose)
-    new_l = [np.interp(np.linspace(0, 1, max_lenght).astype('float'), np.linspace(0, 1, len(l_i)).astype('float'), l_i)
-             for l_i in l]
-    if verbose:
-        min_listoflists_lenght(l)
-    return new_l
+    for json_file in pathlib.Path('.').glob('*.json'):
+      with open(json_file, 'r') as file_in:
+        data = json.load(file_in)
+        for k in data:
+          for i in data[k]:
+            for k, v in i.items():
+              if k not in list(data_dict.keys()):
+                data_dict[k] = [v]
+              else:
+                data_dict[k].append(v)
 
+    return pd.DataFrame.from_dict(data_dict)
+    
+    
+def detect_and_remove_blinking_from(df, columns:list=[]):
+  """From some target keys, remove the 0.0 values from the time-series if any found"""
+  
+  remove_blinking = False
+  for ts_key in columns:
+    for ser in df[ts_key]:
+      for f in ser:
+        if f == 0.0:
+          remove_blinking = True
 
-def normalize_single_lenght(l, max_lenght=0):
-    """l is a list"""
-    if max_lenght == 0:
-        max_lenght = max([len(i) for i in l])
-    print("max_lenght: ", max_lenght)
-    new_l = np.interp(np.linspace(0, 1, max_lenght).astype('float'), np.linspace(0, 1, len(l)).astype('float'), l)
-    return new_l
+  for ser in df['baseline']:
+    for f in ser:
+      if f == 0.0:
+        remove_blinking = True
 
+  if remove_blinking:
+    logging.info("blinking (0.0) values were found in the data!")
+    number_of_data_points_p = len([d for ser in df.pupil_dilation for d in ser])
+    number_of_data_points_b = len([d for ser in df.baseline for d in ser])
+    blinks_p = len([d for ser in df.pupil_dilation for d in ser if d==0.0])
+    blinks_b = len([d for ser in df.baseline for d in ser if d==0.0])
+    df.pupil_dilation = df.pupil_dilation.map(lambda ser: [f for f in ser if f != 0.0])
+    df.baseline = df.baseline.map(lambda ser: [f for f in ser if f != 0.0])
+    logging.info("blinking values have been removed!")
+  else:
+    logging.info("no blinking values were found in your data!")
+  logging.info("consider running outlier detection to clean your data!")
 
-def max_listoflists_lenght(l, verbose=False):
-    """l is a list of lists"""
-    max_lenght = 0
-    for i in l:
-        if max_lenght < len(i):
-            max_lenght = len(i)
-    if verbose:
-        print("min_lenght: ", min_listoflists_lenght(l))
-        print("max_lenght: ", max_lenght)
-    return max_lenght
-
-
-def min_listoflists_lenght(l):
-    """l is a list of lists"""
-    min_lenght = 999999
-    for i in l:
-        if min_lenght > len(i):
-            min_lenght = len(i)
-    return min_lenght
-
-
-def normalize_data(df, by_value=True, by_lenght=True, verbose=True):
-    # normalization
-    print("checking sequence lenghts matching (first 20)...\n")
-
-    if verbose:
-        for ix, (d, p) in enumerate(zip(df['ts_distance'], df['ts_pupil'])):
-            print(f"lenght of sequence in ts_distance: {len(d)}, lenght of sequence in ts_pupil: {len(p)}", end=" ")
-            print_bold(len(d) == len(p))
-            if ix == 15:
-                break
-
-    print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df['ts_distance'].tolist()))
-    print("min lenght in ts_pupil = ", min_listoflists_lenght(df['ts_pupil'].tolist()))
-    print("max lenght in ts_distance = ", max_listoflists_lenght(df['ts_distance'].tolist()))
-    print("max lenght in ts_pupil = ", max_listoflists_lenght(df['ts_pupil'].tolist()))
-
-    # apply normalization to the DataFrame (value and lenght)
-    if by_value:
-        df.ts_distance = df.ts_distance.apply(normalize)
-    if by_lenght:
-        df.ts_pupil = df.ts_pupil.apply(normalize)
-    print("\nthe data has been normalized by value, mean=0, std=1")
-
-    df.ts_distance = normalize_lenghts(df.ts_distance.tolist())
-    df.ts_pupil = normalize_lenghts(df.ts_pupil.tolist(),
-                                    max_lenght=max_listoflists_lenght(df['ts_distance']))
-    print("the data has been normalized by lenght (stretched to the max lenght)")
-
-    if verbose:
-        print("\nmin lenght in ts_distance = ", min_listoflists_lenght(df['ts_distance'].tolist()))
-        print("min lenght in ts_pupil = ", min_listoflists_lenght(df['ts_pupil'].tolist()))
-        print("max lenght in ts_distance = ", max_listoflists_lenght(df['ts_distance'].tolist()))
-        print("max lenght in ts_pupil = ", max_listoflists_lenght(df['ts_pupil'].tolist()))
-
-    max_ts_lenght = max([max_listoflists_lenght(df['ts_distance'].tolist()), max_listoflists_lenght(df['ts_pupil'].tolist())])
-    return df, max_ts_lenght
+  logging.info(f"number of data points in pupil_dilation {number_of_data_points_p}")
+  logging.info(f"number of data points in baseline: {number_of_data_points_b}")
+  logging.info(f"number of blinks removed from pupil_dilation: {blinks_p}, {(blinks_p/number_of_data_points_p)*100}%")
+  logging.info(f"number of blinks removed from baseline: {blinks_b}, {(blinks_b/number_of_data_points_b)*100}%")
+  return df
