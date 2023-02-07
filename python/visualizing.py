@@ -1,4 +1,8 @@
+import logging
 import plotly.graph_objects as go
+
+
+logging.basicConfig(level=logging.INFO)
 
 
 def plot_collection(plot_only_this, distances_collection,
@@ -9,7 +13,7 @@ def plot_collection(plot_only_this, distances_collection,
   """
     fig = go.Figure()
     plots_count = 0
-    print("total number of graphs: ", len(distances_collection))
+    logging.info(f"total number of graphs: {len(distances_collection)}")
 
     for (pattern_name, d) in distances_collection:
         if pattern_name == plot_only_this:
@@ -24,5 +28,5 @@ def plot_collection(plot_only_this, distances_collection,
                 if plots_count == number_of_desired_plots:
                     break
 
-    print("plots: ", plots_count)
+    logging.info(f"plots: {plots_count}")
     return fig

@@ -13,64 +13,25 @@ def json_data_to_dataframe(path: str = '.'):
     corresponds to the readings and labels of one experiment
     """
 
-    logging.info(f"number of files: {len(list(pathlib.Path().glob('*.json')))}")
+    logging.info(f"number of files: {len(list(pathlib.Path(path).glob('*.json')))}")
     logging.info(f"building base dataframe...\n")
     data_dict = dict()
 
-    for json_file in pathlib.Path('.').glob('*.json'):
+    for json_file in pathlib.Path(path).glob('*.json'):
         with open(json_file, 'r') as file_in:
             data = json.load(file_in)
             for k in data:
                 for i in data[k]:
-                    for k, v in i.items():
-                        if k not in list(data_dict.keys()):
-                            data_dict[k] = [v]
+                    for key, v in i.items():
+                        if key not in list(data_dict.keys()):
+                            data_dict[key] = [v]
                         else:
-                            data_dict[k].append(v)
+                            data_dict[key].append(v)
 
     return pd.DataFrame.from_dict(data_dict)
 
 
-def detect_and_remove_blinking_from(df, columns: list = []):
-    """
-    From some target keys, remove the 0.0 values from the time-series if any found.
-    This method assumes there are 'baseline' and 'pupil_dilation' columns in the data.
-    """
-
-    remove_blinking = False
-    for ts_key in columns:
-        for ser in df[ts_key]:
-            for f in ser:
-                if f == 0.0:
-                    remove_blinking = True
-
-    for ser in df['baseline']:
-        for f in ser:
-            if f == 0.0:
-                remove_blinking = True
-
-    if remove_blinking:
-        logging.info("blinking (0.0) values were found in the data!")
-        number_of_data_points_p = len([d for ser in df.pupil_dilation for d in ser])
-        number_of_data_points_b = len([d for ser in df.baseline for d in ser])
-        blinks_p = len([d for ser in df.pupil_dilation for d in ser if d == 0.0])
-        blinks_b = len([d for ser in df.baseline for d in ser if d == 0.0])
-        df.pupil_dilation = df.pupil_dilation.map(lambda ser: [f for f in ser if f != 0.0])
-        df.baseline = df.baseline.map(lambda ser: [f for f in ser if f != 0.0])
-        logging.info("blinking values have been removed!")
-    else:
-        logging.info("no blinking values were found in your data!")
-    logging.info("consider running outlier detection to clean your data!")
-
-    logging.info(f"number of data points in pupil_dilation {number_of_data_points_p}")
-    logging.info(f"number of data points in baseline: {number_of_data_points_b}")
-    logging.info(
-        f"number of blinks removed from pupil_dilation: {blinks_p}, {(blinks_p / number_of_data_points_p) * 100}%")
-    logging.info(f"number of blinks removed from baseline: {blinks_b}, {(blinks_b / number_of_data_points_b) * 100}%")
-    return df
-
-
-def min_listoflists_length(input_l):
+def min_listoflists_length(input_l: list = []):
     """
     From an input list composed of lists, get the maximum
     length of all the inner lists. Can be applied to more
@@ -83,7 +44,7 @@ def min_listoflists_length(input_l):
     return min_length
 
 
-def max_listoflists_length(input_l):
+def max_listoflists_length(input_l: list = []):
     """
     From an input list composed of lists, get the maximum
     length of all the inner lists. Can be applied to more
@@ -102,7 +63,20 @@ def max_listoflists_length(input_l):
     return max_length
 
 
-def normalize_lengths(input_l, max_length=0):
+def standarize(input_l: list = []):
+    """
+    Apply scaling method to make the values of an input list
+    centered around mean with a unit standard deviation
+    """
+    output_l = (input_l - np.mean(input_l)) / np.std(input_l)
+    output_l = [i.tolist() for i in output_l]
+    logging.debug(f"max: {max(output_l)}")
+    logging.debug(f"mean: {np.mean(output_l)}")
+    logging.debug(f"std: {np.std(output_l)}")
+    return output_l
+
+
+def normalize_lengths(input_l: list = [], max_length=0):
     """
     From an input list composed of lists, normalize the lengths of the
     inner lists to the maximum length between all of them. Can be applied
@@ -116,6 +90,27 @@ def normalize_lengths(input_l, max_length=0):
              for l_i in input_l]
     logging.debug(f"min: {str(min_listoflists_length(input_l))}")
     return new_l
+
+
+def normalize_float_resolution_ts(df, columns: list, n_decimal: int = 4):
+    """
+    From an DataFrame, normalize the float values inside the time-series for the
+    targeted columns list to a defined number of n_decimal's.
+    """
+    for column in columns:
+        df[column] = [[round(float(fl), n_decimal) for fl in series] for series in
+                      df[column].tolist()]
+    return df
+
+
+def normalize_float_resolution(df, columns: list, n_decimal: int = 4):
+    """
+    From an DataFrame, normalize the float values inside the targeted columns list
+    to a defined number of decimals.
+    """
+    for column in columns:
+        df[column] = [round(float(m), n_decimal) for m in df[column].tolist()]
+    return df
 
 
 def add_relative_to_baseline(column: str, df):
