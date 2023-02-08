@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
 import logging
+import matplotlib.pyplot as plt
 
 from scipy import stats
+from visualizing import plot_outliers_in
 
 logging.basicConfig(level=logging.INFO)
 
@@ -108,3 +110,110 @@ def remove_outliers_mad_single_feature(df, column: str):
     logging.info(
         f"percentaje of data points removed : {no - number_of_data_points_rp}, {((no - number_of_data_points_rp) / no) * 100}%")
     return df_new
+
+
+def iqr_method(df, k=3, feature='', outliers_name=''):
+    """
+    The Interquartile range (IQR) is calculated as the difference between the 75th and the 25th
+    percentiles of the data. To identify outliers define the limits on the sample values
+    that are a factor k of the IQR below the 25th percentile or above the 75th percentile.
+    The common value for the factor k is the value 1.5. A factor k of 3 or more can be used to
+    identify values that are extreme outliers or 'far outs'.
+    """
+    q1_feature, q3_len_distance = df[feature].quantile([0.25, 0.75])
+    iqr_pc = q3_len_distance - q1_feature
+    lower_pc = q1_feature - (k * iqr_pc)
+    upper_pc = q3_len_distance + (k * iqr_pc)
+    df[outliers_name] = ((df[feature] > upper_pc) | (df[feature] < lower_pc)).astype('int')
+    return df
+
+
+def iqr_analysis(df, column, k=3, plot=True, purge=False):
+    """
+    Performs outlier count and gets the row id with max number of
+    outliers and the max value. Returns tuple of (int, tuple(int,int))
+    """
+    outliers_count = {'0': 0, '1': 0}
+    max_outlier = [0, 0]
+    df_new = df.copy(deep=True)
+    total_number_of_data_points_pre, total_number_of_data_points_post = 0, 0
+    for ix, single in enumerate(df[column]):
+        df_single = pd.DataFrame(single)
+        df_single.columns = ['reading']
+        total_number_of_data_points_pre += len(df_single)
+        df_single = iqr_method(df_single, k, 'reading', 'outlier')
+        outliers_count['0'] += dict(df_single.outlier.value_counts())[0]
+        try:
+            outliers_count['1'] += dict(df_single.outlier.value_counts())[1]
+            if dict(df_single.outlier.value_counts())[1] > max_outlier[0]:
+                max_outlier[0] = dict(df_single.outlier.value_counts())[1]
+                max_outlier[1] = ix
+            if plot:
+                fig = plot_outliers_in(df_single, column)
+                logging.info(f"experiment index: {ix}")
+                plt.show(fig)
+            if purge:
+                df_single = df_single[df_single['outlier'] == 0]
+                df_new['relative_pupil_dilation'][ix] = df_single['reading']
+        except KeyError:
+            pass
+        finally:
+            total_number_of_data_points_post += len(df_single)
+    logging.info(f"outliers count: {outliers_count}")
+    logging.info(f"max_outlier: {str(max_outlier)}")
+    if purge:
+        logging.info(f"total_number_of_data_points_pre: {total_number_of_data_points_pre}")
+        logging.info(f"total_number_of_data_points_post: {total_number_of_data_points_post}")
+        if total_number_of_data_points_pre - total_number_of_data_points_post != outliers_count['1']:
+            logging.debug(
+                f"{total_number_of_data_points_pre - total_number_of_data_points_post} != {outliers_count['1']}")
+            raise Exception("Something went wrong with the removal...")
+        return outliers_count, max_outlier, df_new
+    return outliers_count, max_outlier, df
+
+
+def count_outliers(df_target, column: str):
+    """
+    Helper function to perform only outliers count for the targeted column name
+    """
+    outliers_count = {'0': 0, '1': 0}
+    for ix, single in enumerate(df_target[column]):
+        df_single = pd.DataFrame(single)
+        df_single.columns = ['reading']
+        df_single = iqr_method(df_single, 3, 'reading', 'outlier')
+        outliers_count['0'] += dict(df_single.outlier.value_counts())[0]
+        try:
+            outliers_count['1'] += dict(df_single.outlier.value_counts())[1]
+        except KeyError:
+            pass
+    return outliers_count
+
+
+def purge_iter_iqr_method(df, column: str, n_iter: int):
+    """
+    Iteratively purge the time-series data in 'column' using outliers
+    removal by the IQR method
+    """
+    df_new_iter = df.copy(deep=True)
+    outliers_count = {'0': 0, '1': 0}
+    max_outlier = [0, 0]
+    for i in range(n_iter):
+        for ix, single in enumerate(df_new_iter[column]):
+            df_single = pd.DataFrame(single)
+            df_single.columns = ['reading']
+            df_single = iqr_method(df_single, 3, 'reading', 'outlier')
+            outliers_count['0'] += dict(df_single.outlier.value_counts())[0]
+            try:
+                outliers_count['1'] += dict(df_single.outlier.value_counts())[1]
+                if dict(df_single.outlier.value_counts())[1] > max_outlier[0]:
+                    max_outlier[0] = dict(df_single.outlier.value_counts())[1]
+                    max_outlier[1] = ix
+                df_single = df_single[df_single['outlier'] == 0]
+                df_new_iter[column][ix] = df_single['reading']
+            except KeyError:
+                pass
+        logging.info(f"_________new round {i}__________")
+        logging.info(f"current: {count_outliers(df_new_iter, column)}")
+    logging.info(f"outliers count: {outliers_count}")
+    logging.info(f"max_outlier: {str(max_outlier)}")
+    return df_new_iter
