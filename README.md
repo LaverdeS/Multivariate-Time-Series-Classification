@@ -29,9 +29,9 @@ The purpose of this repo is to provide the tools for time-series data analysis a
 
 ## :clap: Quick Tour
 
-You can run this [Colab notebook](url) to run the examples below.
+You can run this [Colab notebook](notebooks/Time-Series-EDA-tinder.ipynb) to run the examples below.
 
-See the [documentation](https://unstructured-io.github.io/unstructured) for a full description
+See the [documentation](https://github.com/LaverdeS/Multivariate-Time-Series-Classification) for a full description
 of the features in the library.
 
 ### 🛠️ Tools / Blocks
