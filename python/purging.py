@@ -140,7 +140,7 @@ def iqr_analysis(df, column, k=3, plot=True, purge=False):
     total_number_of_data_points_pre, total_number_of_data_points_post = 0, 0
     if isinstance(plot, bool):
         plot = 0 if not plot else len(df[column])
-
+    plot_count = 0
     for ix, single in enumerate(df[column]):
         df_single = pd.DataFrame(single)
         df_single.columns = ['reading']
@@ -152,10 +152,11 @@ def iqr_analysis(df, column, k=3, plot=True, purge=False):
             if dict(df_single.outlier.value_counts())[1] > max_outlier[0]:
                 max_outlier[0] = dict(df_single.outlier.value_counts())[1]
                 max_outlier[1] = ix
-            if ix < plot:
+            if plot_count < plot:
                 fig = plot_outliers_in(df_single, column)
                 logging.info(f"experiment index: {ix}")
                 plt.show(fig)
+                plot_count += 1
             if purge:
                 df_single = df_single[df_single['outlier'] == 0]
                 df_new['relative_pupil_dilation'][ix] = df_single['reading']
