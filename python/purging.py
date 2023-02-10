@@ -4,7 +4,7 @@ import logging
 import matplotlib.pyplot as plt
 
 from scipy import stats
-from visualizing import plot_outliers_in
+from python.visualizing import plot_outliers_in
 
 logging.basicConfig(level=logging.INFO)
 
