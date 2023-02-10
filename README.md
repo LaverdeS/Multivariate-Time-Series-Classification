@@ -18,24 +18,66 @@
  Multivariate-Time-Series-Classification
 </h1>
 
-The purpose of this repo is to provide the tools for time-series data analysis and data preparation pipelines for machine learning applications and research with eye-tracking data: gaze and pupil dilation. The initial processing and transformation blocks enhance the researcher for rapid-prototyping data applications and first hand data cleaning and visualization. 
+The purpose of this repo is to provide some tools for time-series [Exploratory Data Analysis (EDA)](https://www.ibm.com/topics/exploratory-data-analysis) and data preparation pipelines for machine learning applications and research with eye-tracking data: gaze and pupil dilation in. The initial processing and transformation blocks enhance the researcher for rapid-prototyping data applications and first-hand data cleaning, visualization and chained transformations. 
+
+The tool-box is organized by modules found on the [python](python) folder. The tools are part of one of the following families:
+- Preprocessing tools: including data loader, DataFrame constructures, transformation functions to format, standarize, and normalize the data.
+- Visualizing tools: plotting methods that assist in EDA of time series data and reporting.
+- Purging tools: methods use to clean data points from time-series features and to detect + visualize + remove outliers from the data by statistical methods such as [Median Absolute Deviation (MAD)](https://www.graphpad.com/support/faq/what-is-the-median-absolute-deviation-mad-/) and [Interquartile Range (IQR)](https://statisticsbyjim.com/basics/interquartile-range/).
 
 ## :coffee: Getting Started
 
-* Create a virtualenv to work in and activate it, e.g. conda environment named 'ts-tools':
+* Create a [conda environment](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-python.html) to work in and activate it, e.g. conda environment named 'ts-tools':
 
-	`conda create ts-tools` <br />
+	`conda create ts-tools python=3.7` <br />
 	`conda activate ts-tools`
-
+	
+* Install the requirements using the `requirements.txt` and python package manage pip:
+	
+	`pip install -r requirements.txt`
+	
 ## :clap: Quick Tour
 
-You can run this [Colab notebook](notebooks/Time-Series-EDA-tinder.ipynb) to run the examples below.
+You can run this [Jupyter notebook](notebooks/Time-Series-EDA-tinder.ipynb) to quickly check some methods that served for one of the use-cases: [Keeping an eye on Tinder](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/keeping-an-eye-on-tinder)
 
-See the [documentation](https://github.com/LaverdeS/Multivariate-Time-Series-Classification) for a full description
-of the features in the library.
+<!-- See the [documentation](https://github.com/LaverdeS/Multivariate-Time-Series-Classification) for a full description
+of the features in the library. -->
+
+The following code summarizes the how to use chained methods from the tool-box for doing a clean EDA and data preparation in 6 steps. This input for this pipeline are the `.json` files and the output is a `.csv` containing ml-ready data. This is the equivalent of a data pipeline and some methods for visualizing time-series data:
+
+```python
+from python.preprocessing import json_data_to_dataframe, add_relative_to_baseline, 
+from python.preprocessing import normalize_lengths, normalize_float_resolution_ts, standarize
+from python.visualizing import plot_collection
+from python.purging import remove_outliers_mad_single_feature
+
+# Load and purge the data from blinking values
+df = json_data_to_dataframe(path='sample-data/tinder')
+df = detect_and_remove_blinking_from(df, ['pupil_dilation', 'baseline'])
+
+# Visualize the data
+pupil_collection = [(rating, series_i) for rating, series_i in zip(df.rating, df.pupil_dilation)]
+HTML(plot_collection(4, pupil_collection).to_html())
+
+# Add calculated fields and normalize lengths
+df = add_relative_to_baseline('pupil_dilation', df)
+df['relative_pupil_dilation'] = normalize_lengths(df.relative_pupil_dilation.tolist())
+
+# Remove extreme outliers using MAD, normalize float resolution and standarize time-series
+df = remove_outliers_mad_single_feature(df, column='relative_pupil_dilation')
+df = normalize_float_resolution_ts(df, columns=['pupil_dilation', 'relative_pupil_dilation', 'baseline'])
+df.relative_pupil_dilation = df.relative_pupil_dilation.apply(standarize)
+
+# Visualize the transformed data
+relative_pupil_collection = [(rating, series_i) for rating, series_i in zip(df.rating, df.relative_pupil_dilation)]
+HTML(plot_collection(4, relative_pupil_collection).to_html())
+
+# Save to disk
+df.to_csv("ml-ready-data.csv")
+```
 
 ### 🛠️ Tools / Blocks
-The developer tools can be fouund on [python](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/python).
+The developer tools can be found inside the [python](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/python) directory.
 
 ## 💼 Use Cases
 The following examples are using the tools provided by this repository and can be foundational for similar kind of work.
