@@ -77,7 +77,7 @@ HTML(plot_collection(4, relative_pupil_collection).to_html())
 df.to_csv("ml-ready-data.csv")
 ```
 
-### 🛠️ Tools / Blocks
+## 🛠️ Tools / Blocks
 The developer tools can be found inside the [python](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/python) directory.
 
 ## 💼 Use Cases
