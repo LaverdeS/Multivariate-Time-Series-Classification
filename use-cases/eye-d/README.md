@@ -10,9 +10,6 @@
  <a href="https://www.python.org/downloads/release/python-370/">
       <img src="https://img.shields.io/badge/python-3.7-brightgreen.svg">
   </a>
- <a href="https://saythanks.io/to/lavmlk20201">
-      <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
-  </a>
  <a href="https://www.buymeacoffee.com/lavmlk2020B" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height=22 width=110>
   </a>
 </p>
