@@ -131,12 +131,16 @@ def iqr_method(df, k=3, feature='', outliers_name=''):
 def iqr_analysis(df, column, k=3, plot=True, purge=False):
     """
     Performs outlier count and gets the row id with max number of
-    outliers and the max value. Returns tuple of (int, tuple(int,int))
+    outliers and the max value. Returns tuple of (int, tuple(int,int)).
+    The parameter 'plot' can receive a bool or int values.
     """
     outliers_count = {'0': 0, '1': 0}
     max_outlier = [0, 0]
     df_new = df.copy(deep=True)
     total_number_of_data_points_pre, total_number_of_data_points_post = 0, 0
+    if isinstance(plot, bool):
+        plot = 0 if not plot else len(df[column])
+
     for ix, single in enumerate(df[column]):
         df_single = pd.DataFrame(single)
         df_single.columns = ['reading']
@@ -148,7 +152,7 @@ def iqr_analysis(df, column, k=3, plot=True, purge=False):
             if dict(df_single.outlier.value_counts())[1] > max_outlier[0]:
                 max_outlier[0] = dict(df_single.outlier.value_counts())[1]
                 max_outlier[1] = ix
-            if plot:
+            if ix < plot:
                 fig = plot_outliers_in(df_single, column)
                 logging.info(f"experiment index: {ix}")
                 plt.show(fig)
