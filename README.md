@@ -85,6 +85,10 @@ The following examples are using the tools provided by this repository and can b
 - [Keeping an Eye on Tinder: ](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/keeping-an-eye-on-tinder) Towards Automated Detection of Partner Selection via Pupillary Data from Eye-tracker and Smartphone Cameras
 - [Eye-D:](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/eye-d) Identifying Users by their Gaze and Pupil Diameter Data while Drawing Patterns
 
+## 📝 License
+
+The [GNU General Public License](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/blob/main/LICENSE): Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed. Note that free here refers to freedom but not free of price. Doing this repository took several hours. This time and effort is with the spirit of providing the research community with beneficial tools for their eye-tracking projects. Everyone is welcome to contribute. If you find this repository useful and want to suppot the author, you can [Buy Me a Coffe!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)
+
 <!--
 ## :books: Learn more
 
