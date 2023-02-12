@@ -1,6 +1,7 @@
 import logging
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 logging.basicConfig(level=logging.INFO)
 
@@ -48,3 +49,14 @@ def plot_outliers_in(df_single, y_label_name: str, outlier_name: str = 'outlier'
     _ = plt.title('EXTREME Experimental Outliers for Number of Data Samples per Experiment')
     _ = plt.legend(loc='best')
     return fig
+
+
+def show_confusion_matrix(confusion_matrix):
+    """
+    Display a confusion matrix DataFrame as a heatmap figure
+    """
+    hmap = sns.heatmap(confusion_matrix, annot=True, fmt="d", cmap="Blues")
+    hmap.yaxis.set_ticklabels(hmap.yaxis.get_ticklabels(), rotation=0, ha='right')
+    hmap.xaxis.set_ticklabels(hmap.xaxis.get_ticklabels(), rotation=30, ha='right')
+    plt.ylabel('True User')
+    plt.xlabel('Predicted User')
