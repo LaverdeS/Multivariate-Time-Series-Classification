@@ -236,11 +236,11 @@ class BinaryTimeSeriesClassifier(object):
                     classifier = RandomForestClassifier(n_estimators=100)
                     try:
                         classifier.fit(X_train, y_train)
+                        y_pred = classifier.predict(X_test)
                     except ValueError:
                         logging.debug(f"ValueError: Input contains NaN, infinity or a value too large for dtype('float32')")
                         logging.debug(f"df_extrated_features: \n{df_extrated_features}")
                         # todo: what is causing this and how to adapt
-                    y_pred = classifier.predict(X_test)
                     logging.info(f"random forest score: {accuracy_score(y_test, y_pred)}")
                     predictions = classifier.predict(X_test)
                     df_eval = pd.DataFrame([(p, t) for p, t in zip(predictions, y_test.tolist())],
