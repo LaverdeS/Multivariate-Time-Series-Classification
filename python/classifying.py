@@ -216,6 +216,7 @@ class BinaryTimeSeriesClassifier(object):
             logging.info(f"{extracted_features.describe()}")
             extracted_features.shape
             df_extrated_features = pd.concat([extracted_features, self.y], axis=1)
+            exit_with_error = False
             for seed in seeds:
                 df_sample = df_extrated_features.groupby('rating', group_keys=False).apply(
                     lambda x: x.sample(n_samples, random_state=seed))
@@ -240,6 +241,7 @@ class BinaryTimeSeriesClassifier(object):
                     except ValueError:
                         logging.debug(f"ValueError: Input contains NaN, infinity or a value too large for dtype('float32')")
                         logging.debug(f"df_extrated_features: \n{df_extrated_features}")
+                        exit_with_error = True
                         break
                         # todo: what is causing this and how to adapt
                     logging.info(f"random forest score: {accuracy_score(y_test, y_pred)}")
@@ -257,11 +259,14 @@ class BinaryTimeSeriesClassifier(object):
         else:
             logging.warning("Available time-serie classification methods: tabularization, rocket, feature-extractor")
 
-        logging.info(f"best global acc: {round(best_global_acc, 2)}")
-        logging.info(
-            f"{classification_report(best_model.truth.tolist(), best_model.prediction.tolist(), target_names=list(set(best_model.truth.tolist())))}")
-        cm = confusion_matrix(best_model.truth.tolist(), best_model.prediction.tolist())
-        df_cm = pd.DataFrame(cm, index=list(set(best_model.truth.tolist())),
-                             columns=list(set(best_model.truth.tolist())))
-        show_confusion_matrix(df_cm)
-        plt.show()
+        if not exit_with_error:
+            logging.info(f"best global acc: {round(best_global_acc, 2)}")
+            logging.info(
+                f"{classification_report(best_model.truth.tolist(), best_model.prediction.tolist(), target_names=list(set(best_model.truth.tolist())))}")
+            cm = confusion_matrix(best_model.truth.tolist(), best_model.prediction.tolist())
+            df_cm = pd.DataFrame(cm, index=list(set(best_model.truth.tolist())),
+                                 columns=list(set(best_model.truth.tolist())))
+            show_confusion_matrix(df_cm)
+            plt.show()
+        else:
+            logging.critical(f"Training cycle ended with errors1")
