@@ -269,4 +269,4 @@ class BinaryTimeSeriesClassifier(object):
             show_confusion_matrix(df_cm)
             plt.show()
         else:
-            logging.critical(f"Training cycle ended with errors1")
+            logging.critical(f"Training cycle ended with errors!")
