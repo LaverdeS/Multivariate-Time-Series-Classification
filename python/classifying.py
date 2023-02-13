@@ -104,7 +104,7 @@ class BinaryTimeSeriesClassifier(object):
         best_model = pd.DataFrame()
         logging.info(f"number of samples per class: {n_samples}")
         logging.info(f"tuning to obtain the best model (method: {self.method}, k_folds: {k_folds})...")
-
+        exit_with_error = False
         if self.method == "tabularization":
             """
             Use a RandomForestClassifier as default, but it can be easily 
@@ -214,9 +214,7 @@ class BinaryTimeSeriesClassifier(object):
             feature_transformer = TSFreshFeatureExtractor(default_fc_parameters="minimal")
             extracted_features = feature_transformer.fit_transform(self.X)
             logging.info(f"{extracted_features.describe()}")
-            extracted_features.shape
             df_extrated_features = pd.concat([extracted_features, self.y], axis=1)
-            exit_with_error = False
             for seed in seeds:
                 df_sample = df_extrated_features.groupby('rating', group_keys=False).apply(
                     lambda x: x.sample(n_samples, random_state=seed))
