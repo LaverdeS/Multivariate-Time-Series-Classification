@@ -30,7 +30,7 @@ class BinaryTimeSeriesClassifier(object):
         self.labels = [label_column, pd.DataFrame()]
         self.data = self._load_data_from_path(data_path)
         self.mode = "univariate" if not multi else "multivariate"
-        self.method = method
+        self.method = method.lower()
         self.X, self.X_name, self.y = pd.DataFrame(), '', pd.DataFrame()
         """
         Extra config/attributes can be added to set the training strategy. For instance:
@@ -105,7 +105,7 @@ class BinaryTimeSeriesClassifier(object):
         logging.info(f"number of samples per class: {n_samples}")
         logging.info(f"tuning to obtain the best model (method: {self.method}, k_folds: {k_folds})...")
 
-        if self.method.lower() == "tabularization":
+        if self.method == "tabularization":
             """
             Use a RandomForestClassifier as default, but it can be easily 
             adapted to use ANY other classifier type after tabularization is done, including rocket.
@@ -162,7 +162,7 @@ class BinaryTimeSeriesClassifier(object):
                     best_global_acc = best_acc
                     best_model = best_df_eval
 
-        elif self.method.lower() == "rocket":
+        elif self.method == "rocket":
             """
             MiniRockets train loop for ts-classification
             """
@@ -191,8 +191,8 @@ class BinaryTimeSeriesClassifier(object):
                     classifier = RidgeClassifierCV(alphas=np.logspace(-3, 3, 10), normalize=True)
                     classifier.fit(X_train_transform, y_train)
                     X_test_transform = minirocket.transform(X_test)
-                    logging.info(f"accuracy: ", classifier.score(X_test_transform, y_test))  # mean acc using LOO
-                    logging.info(f"best_score_: ", classifier.best_score_)
+                    logging.info(f"accuracy: {classifier.score(X_test_transform, y_test)}")  # mean acc using LOO
+                    logging.info(f"best_score_: {classifier.best_score_}")
 
                     predictions = classifier.predict(X_test_transform)
                     df_eval = pd.DataFrame([(p, t) for p, t in zip(predictions, y_test.tolist())],
@@ -206,7 +206,7 @@ class BinaryTimeSeriesClassifier(object):
                     best_global_acc = best_acc
                     best_model = best_df_eval
 
-        elif self.method.lower() == "feature-extractor":
+        elif self.method == "feature-extractor":
             """
             Extracts statistical features and train a RandomForestClassifier as the default model,
             but ANY model can be used after this point
@@ -234,7 +234,12 @@ class BinaryTimeSeriesClassifier(object):
                     logging.info(f"Dummy score: {classifier.score(X_test, y_test)}")
 
                     classifier = RandomForestClassifier(n_estimators=100)
-                    classifier.fit(X_train, y_train)
+                    try:
+                        classifier.fit(X_train, y_train)
+                    except ValueError:
+                        logging.debug(f"ValueError: Input contains NaN, infinity or a value too large for dtype('float32')")
+                        logging.debug(f"df_extrated_features: \n{df_extrated_features}")
+                        # todo: what is causing this and how to adapt
                     y_pred = classifier.predict(X_test)
                     logging.info(f"random forest score: {accuracy_score(y_test, y_pred)}")
                     predictions = classifier.predict(X_test)
@@ -250,6 +255,7 @@ class BinaryTimeSeriesClassifier(object):
                     best_model = best_df_eval
         else:
             logging.warning("Available time-serie classification methods: tabularization, rocket, feature-extractor")
+
         logging.info(f"best global acc: {round(best_global_acc, 2)}")
         logging.info(
             f"{classification_report(best_model.truth.tolist(), best_model.prediction.tolist(), target_names=list(set(best_model.truth.tolist())))}")
