@@ -240,6 +240,7 @@ class BinaryTimeSeriesClassifier(object):
                     except ValueError:
                         logging.debug(f"ValueError: Input contains NaN, infinity or a value too large for dtype('float32')")
                         logging.debug(f"df_extrated_features: \n{df_extrated_features}")
+                        break
                         # todo: what is causing this and how to adapt
                     logging.info(f"random forest score: {accuracy_score(y_test, y_pred)}")
                     predictions = classifier.predict(X_test)
