@@ -22,9 +22,10 @@
 The purpose of this repo is to provide some tools for time-series [Exploratory Data Analysis (EDA)](https://www.ibm.com/topics/exploratory-data-analysis) and data preparation pipelines for machine learning applications and research with eye-tracking data: gaze and pupil dilation in. The initial processing and transformation blocks enhance the researcher for rapid-prototyping data applications and first-hand data cleaning, visualization and chained transformations. 
 
 The tool-box is organized by modules found on the [python](python) folder. The tools are part of one of the following families:
-- 🌠 Preprocessing tools: including data loader, DataFrame constructures, transformation functions to format, standarize, and normalize the data.
-- 🎨 Visualizing tools: plotting methods that assist in EDA of time series data and reporting.
-- 🪓 Purging tools: methods use to clean data points from time-series features and to detect + visualize + remove outliers from the data by statistical methods such as [Median Absolute Deviation (MAD)](https://www.graphpad.com/support/faq/what-is-the-median-absolute-deviation-mad-/) and [Interquartile Range (IQR)](https://statisticsbyjim.com/basics/interquartile-range/).
+- 🌠 **Preprocessing tools:** including data loader, DataFrame constructures, transformation functions to format, standarize, and normalize the data.
+- 🎨 **Visualizing tools:** plotting methods that assist in EDA of time series data and reporting.
+- 🪓 **Purging tools:** methods use to clean data points from time-series features and to detect + visualize + remove outliers from the data by statistical methods such as [Median Absolute Deviation (MAD)](https://www.graphpad.com/support/faq/what-is-the-median-absolute-deviation-mad-/) and [Interquartile Range (IQR)](https://statisticsbyjim.com/basics/interquartile-range/).
+- 👁️ **Classyfing tools:** BinaryTimeSeriesClassifier class with methods to train univariate or multivariate time-series classification with eye-tracking data (pupil dilations, gaze path, ...). Training strategies/models: RandomForestClassifier (using Tabularization and/or Feature Extractors) and ROCKET-CNN. Tabularization and Feature Extractor transformations can be applied as preprocessing steps for ROCKET-CNN and other time-series classification models from sktime.
 
 ## :coffee: Getting Started
 
@@ -39,7 +40,7 @@ The tool-box is organized by modules found on the [python](python) folder. The t
 	
 ## :clap: Quick Tour
 
-You can run this [Jupyter notebook](notebooks/Time-Series-EDA-tinder.ipynb) to quickly check some methods that served for one of the use-cases: [Keeping an eye on Tinder](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/keeping-an-eye-on-tinder)
+You can run this [Jupyter notebook](notebooks/Time-Series-EDA-tinder.ipynb) locally or this [Google Colab notebook](https://colab.research.google.com/drive/1cmEeaysFMeBgyP3u8Im4nkdr-OXfssNn?usp=sharing) to quickly check some methods that served for one of the use-cases: [Keeping an eye on Tinder](https://github.com/LaverdeS/Multivariate-Time-Series-Classification/tree/main/use-cases/keeping-an-eye-on-tinder)
 
 <!-- See the [documentation](https://github.com/LaverdeS/Multivariate-Time-Series-Classification) for a full description
 of the features in the library. -->
@@ -100,6 +101,12 @@ The following developer tools list of 17 methods are part of the modules inside 
 - `iqr_analysis`
 - `count_outliers`
 - `purge_iter_iqr_method`
+### 👁️ Classyfing (BinaryTimeSeriesClassifier)
+- `_prepare_binary_labels`
+- `_load_data_from_path`
+- `build_training_data`
+- `save_training_data`
+- `train` [`tabularization`, `rocket`, `feature-extractor`]
 
 ## 💼 Use Cases
 The following examples are using the tools provided by this repository and can be foundational for similar kind of work.
