@@ -63,7 +63,7 @@ def max_listoflists_length(input_l: list = []):
     return max_length
 
 
-def standarize(input_l: list = []):
+def standardize(input_l: list = []):
     """
     Apply scaling method to make the values of an input list
     centered around mean with a unit standard deviation
@@ -113,11 +113,11 @@ def normalize_float_resolution(df, columns: list, n_decimal: int = 4):
     return df
 
 
-def add_relative_to_baseline(column: str, df):
+def add_relative_to_baseline(column: str, df, baseline_column='baseline'):
     """
     Adds a relative calculated field by substracting each step value in the
     column target time series by the mean of the 'baseline' reading.
     """
-    df['baseline_mean'] = [sum(s) / len(s) for s in df['baseline']]
+    df['baseline_mean'] = [sum(s) / len(s) for s in df[baseline_column]]
     df[f'relative_{column}'] = [df[column][i] - df['baseline_mean'][i] for i in range(len(df))]
     return df
